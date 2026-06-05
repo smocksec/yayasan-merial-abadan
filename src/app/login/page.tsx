@@ -1,8 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
 import logoYayasan from "../../../public/logo-yayasan.jpg";
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function Login() {
+export default async function Login(props: { searchParams: Promise<{ message?: string }> }) {
+  const searchParams = await props.searchParams;
+  
+  const signIn = async (formData: FormData) => {
+    "use server";
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return redirect("/login?message=Email atau password yang Anda masukkan salah.");
+    }
+
+    return redirect("/dashboard");
+  };
+
   return (
     <div className="bg-surface-container-low min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop font-body-md text-on-surface -mt-20">
       <div className="bg-surface-container-lowest w-full max-w-[480px] shadow-[0_4px_20px_rgba(23,46,64,0.05)] p-8 md:p-12 flex flex-col items-center text-center rounded-[24px]">
@@ -14,22 +39,34 @@ export default function Login() {
           />
           <h1 className="font-headline-md text-headline-md font-bold text-primary">Yayasan Merial Abadan Madani</h1>
         </div>
-        <div className="w-full mb-10">
+        <div className="w-full mb-6">
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary-container mb-2">Selamat Datang</h2>
-          <p className="font-body-md text-body-md text-on-surface-variant">Silakan masuk untuk melanjutkan ke portal.</p>
+          <p className="font-body-md text-body-md text-on-surface-variant">Silakan masuk untuk mengakses portal.</p>
         </div>
-        <Link href="/dashboard" className="w-full">
-          <button className="w-full flex items-center justify-center gap-3 border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-300 py-3 px-6 font-label-md text-label-md text-on-surface hover:-translate-y-[2px] hover:shadow-[0_4px_20px_rgba(23,46,64,0.08)] rounded-full">
-            <img
-              alt="Google Logo"
-              className="w-5 h-5"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgCTNbzUwK3yZNs4g3q5zUnIrmJNKQnCBhl53f_huhDltsH_dPqz4GSNpGEuAz9gZXjmddcxRsVXaDlO3DYyYTM-9BxVi1x8fUl5SkKz4f7nlMB32jCSi46bisXuiVaSG_VXazpnlchSw40R90560IfEfdNwhPTfb28p3OcCYLL2gHLyM6Fm3t64qQQtHbpxc9g3sPvmkfgv4L8BWxjPFVN-_v7IAkQOXJvjsCDPJllTIuebvcNwWqLLWsM2soauhu05mHIh_loU4"
-            />
-            Login dengan Google
+
+        {searchParams?.message && (
+          <p className="p-4 bg-tertiary-container text-on-tertiary-container rounded-xl text-center w-full mb-6 text-sm font-medium">
+            {searchParams.message}
+          </p>
+        )}
+
+        <form action={signIn} className="w-full space-y-4">
+          <div className="text-left space-y-1">
+            <label className="font-label-md text-label-md text-primary" htmlFor="email">Email</label>
+            <input type="email" name="email" id="email" required className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="Admin/User Email" />
+          </div>
+          <div className="text-left space-y-1">
+            <label className="font-label-md text-label-md text-primary" htmlFor="password">Password</label>
+            <input type="password" name="password" id="password" required className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="********" />
+          </div>
+          <button type="submit" className="w-full mt-4 py-3 px-6 bg-primary text-white font-label-md text-label-md rounded-full hover:bg-[#122432] transition-colors shadow-md">
+            Masuk
           </button>
-        </Link>
-        <div className="mt-8 text-center">
-          <a className="font-caption text-caption text-secondary hover:underline transition-all" href="#">Butuh bantuan? Hubungi Administrator</a>
+        </form>
+
+        <div className="mt-8 text-center flex flex-col gap-2">
+          <Link className="font-caption text-caption text-secondary hover:underline transition-all font-bold" href="/register">Belum punya akun? Daftar</Link>
+          <a className="font-caption text-caption text-on-surface-variant hover:underline transition-all" href="#">Butuh bantuan? Hubungi Administrator</a>
         </div>
       </div>
     </div>
