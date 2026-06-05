@@ -13,14 +13,20 @@ export default async function AdminDashboard() {
     redirect('/dashboard');
   }
 
-  // Data Mockup untuk UI sementara (karena form registrasi belum insert ke DB)
-  const mockRegistrations = [
-    { id: "REG-001", namaAnak: "Budi Santoso", program: "TK", tanggal: "05 Juni 2026", status: "Menunggu", noHp: "081234567890" },
-    { id: "REG-002", namaAnak: "Siti Aminah", program: "PAUD", tanggal: "04 Juni 2026", status: "Diterima", noHp: "089876543210" },
-    { id: "REG-003", namaAnak: "Ahmad Dahlan", program: "TK", tanggal: "03 Juni 2026", status: "Ditolak", noHp: "087712345678" },
-    { id: "REG-004", namaAnak: "Aisyah Putri", program: "PAUD", tanggal: "02 Juni 2026", status: "Diterima", noHp: "085511223344" },
-    { id: "REG-005", namaAnak: "Reza Rahardian", program: "TK", tanggal: "01 Juni 2026", status: "Menunggu", noHp: "082233445566" },
-  ];
+  // Mengambil data asli dari Supabase
+  const { data: registrations, error } = await supabase
+    .from('registrations')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  // Menangani potensi error (misal jika tabel belum dibuat)
+  const displayData = registrations || [];
+
+  // Hitung Statistik
+  const totalPendaftar = displayData.length;
+  const totalPAUD = displayData.filter((r) => r.program === 'PAUD').length;
+  const totalTK = displayData.filter((r) => r.program === 'TK').length;
+  const totalMenunggu = displayData.filter((r) => r.status === 'Menunggu').length;
 
   return (
     <main className="pt-8 md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1400px] mx-auto min-h-screen">
@@ -56,8 +62,8 @@ export default async function AdminDashboard() {
             </div>
             <span className="font-title-md text-title-md text-primary">Total</span>
           </div>
-          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">124</p>
-          <p className="font-caption text-caption text-on-surface-variant relative z-10">+12 pendaftar baru minggu ini</p>
+          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalPendaftar}</p>
+          <p className="font-caption text-caption text-on-surface-variant relative z-10">Total pendaftar saat ini</p>
         </div>
 
         <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
@@ -68,8 +74,8 @@ export default async function AdminDashboard() {
             </div>
             <span className="font-title-md text-title-md text-primary">PAUD</span>
           </div>
-          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">48</p>
-          <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar</p>
+          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalPAUD}</p>
+          <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar PAUD</p>
         </div>
 
         <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
@@ -80,8 +86,8 @@ export default async function AdminDashboard() {
             </div>
             <span className="font-title-md text-title-md text-primary">TK</span>
           </div>
-          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">76</p>
-          <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar</p>
+          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalTK}</p>
+          <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar TK</p>
         </div>
 
         <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
@@ -92,7 +98,7 @@ export default async function AdminDashboard() {
             </div>
             <span className="font-title-md text-title-md text-primary">Menunggu</span>
           </div>
-          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">15</p>
+          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalMenunggu}</p>
           <p className="font-caption text-caption text-[#E53935] relative z-10 font-bold">Perlu verifikasi Anda</p>
         </div>
       </div>
@@ -133,54 +139,62 @@ export default async function AdminDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-container">
-              {mockRegistrations.map((reg) => (
-                <tr key={reg.id} className="hover:bg-surface-container-lowest/50 transition-colors">
-                  <td className="py-4 px-6 font-body-md text-body-md text-on-surface font-medium">{reg.id}</td>
-                  <td className="py-4 px-6 font-body-md text-body-md text-primary font-bold">{reg.namaAnak}</td>
-                  <td className="py-4 px-6">
-                    <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm ${reg.program === 'TK' ? 'bg-secondary/10 text-secondary' : 'bg-[#C89B53]/10 text-[#C89B53]'}`}>
-                      {reg.program}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 font-body-md text-body-md text-on-surface-variant">{reg.tanggal}</td>
-                  <td className="py-4 px-6 font-body-md text-body-md text-on-surface">{reg.noHp}</td>
-                  <td className="py-4 px-6">
-                    <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center w-fit gap-1.5
-                      ${reg.status === 'Diterima' ? 'bg-green-100 text-green-700' : 
-                        reg.status === 'Ditolak' ? 'bg-red-100 text-red-700' : 
-                        'bg-orange-100 text-orange-700'}`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${reg.status === 'Diterima' ? 'bg-green-500' : reg.status === 'Ditolak' ? 'bg-red-500' : 'bg-orange-500'}`}></span>
-                      {reg.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 flex items-center justify-end gap-2">
-                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-secondary hover:text-white transition-colors text-primary" title="Lihat Berkas">
-                      <span className="material-symbols-outlined text-[18px]">visibility</span>
-                    </button>
-                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-green-500 hover:text-white transition-colors text-primary" title="Terima Pendaftaran">
-                      <span className="material-symbols-outlined text-[18px]">check</span>
-                    </button>
-                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-red-500 hover:text-white transition-colors text-primary" title="Tolak">
-                      <span className="material-symbols-outlined text-[18px]">close</span>
-                    </button>
+              {displayData.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="py-8 text-center text-on-surface-variant font-body-md">
+                    Belum ada data pendaftaran di Supabase.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                displayData.map((reg: any) => (
+                  <tr key={reg.id} className="hover:bg-surface-container-lowest/50 transition-colors">
+                    <td className="py-4 px-6 font-body-md text-body-md text-on-surface font-medium">{reg.id.substring(0, 8).toUpperCase()}</td>
+                    <td className="py-4 px-6 font-body-md text-body-md text-primary font-bold">{reg.nama_anak}</td>
+                    <td className="py-4 px-6">
+                      <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm ${reg.program === 'TK' ? 'bg-secondary/10 text-secondary' : 'bg-[#C89B53]/10 text-[#C89B53]'}`}>
+                        {reg.program || 'N/A'}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 font-body-md text-body-md text-on-surface-variant">
+                      {new Date(reg.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </td>
+                    <td className="py-4 px-6 font-body-md text-body-md text-on-surface">{reg.no_hp_ortu || '-'}</td>
+                    <td className="py-4 px-6">
+                      <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center w-fit gap-1.5
+                        ${reg.status === 'Diterima' ? 'bg-green-100 text-green-700' : 
+                          reg.status === 'Ditolak' ? 'bg-red-100 text-red-700' : 
+                          'bg-orange-100 text-orange-700'}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${reg.status === 'Diterima' ? 'bg-green-500' : reg.status === 'Ditolak' ? 'bg-red-500' : 'bg-orange-500'}`}></span>
+                        {reg.status || 'Menunggu'}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 flex items-center justify-end gap-2">
+                      <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-secondary hover:text-white transition-colors text-primary" title="Lihat Berkas">
+                        <span className="material-symbols-outlined text-[18px]">visibility</span>
+                      </button>
+                      <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-green-500 hover:text-white transition-colors text-primary" title="Terima Pendaftaran">
+                        <span className="material-symbols-outlined text-[18px]">check</span>
+                      </button>
+                      <button className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-red-500 hover:text-white transition-colors text-primary" title="Tolak">
+                        <span className="material-symbols-outlined text-[18px]">close</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
         
         {/* Pagination */}
         <div className="p-4 border-t border-surface-container flex items-center justify-between">
-          <p className="font-body-sm text-body-sm text-on-surface-variant">Menampilkan 1-5 dari 124 data</p>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">Menampilkan {displayData.length} data terbaru</p>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low" disabled>
               <span className="material-symbols-outlined text-[18px]">chevron_left</span>
             </button>
             <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-label-md text-label-md">1</button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low font-label-md text-label-md">2</button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low font-label-md text-label-md">3</button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low">
+            <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low" disabled>
               <span className="material-symbols-outlined text-[18px]">chevron_right</span>
             </button>
           </div>

@@ -2,13 +2,58 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { createBrowserClient } from "@supabase/ssr";
+import { useRouter } from "next/navigation";
 
 export default function Pendaftaran() {
   const [step, setStep] = useState(1);
+  const [allFormData, setAllFormData] = useState<any>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
-  const handleNext = (e: React.FormEvent) => {
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
+
+  const handleNext = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (step < 4) setStep(step + 1);
+    
+    // Simpan data dari step saat ini
+    const currentFormData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(currentFormData.entries());
+    const mergedData = { ...allFormData, ...data };
+    setAllFormData(mergedData);
+
+    if (step < 4) {
+      setStep(step + 1);
+    } else {
+      // Step 4: Submit ke Supabase
+      setIsSubmitting(true);
+      
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        const { error } = await supabase.from('registrations').insert({
+          user_id: user?.id,
+          nama_anak: mergedData.nama_anak || 'Tanpa Nama',
+          program: mergedData.program || 'PAUD',
+          no_hp_ortu: mergedData.nohp_ayah || mergedData.nohp_ibu || '-',
+          data_lengkap: mergedData,
+          status: 'Menunggu'
+        });
+
+        if (error) throw error;
+        
+        // Sukses! Arahkan ke dashboard
+        router.push('/dashboard?message=Pendaftaran berhasil dikirim!');
+      } catch (err) {
+        console.error("Error submitting form:", err);
+        alert("Gagal mengirim pendaftaran. Pastikan Anda sudah login.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
   };
 
   const handleBack = () => {
@@ -72,12 +117,29 @@ export default function Pendaftaran() {
             <form onSubmit={handleNext} className="space-y-6">
               {step === 1 && (
                 <>
+                  {/* Program Pilihan */}
+                  <div className="space-y-3 mb-6">
+                    <label className="block font-label-md text-label-md text-primary font-bold">Pilih Program <span className="text-red-500">*</span></label>
+                    <div className="flex flex-wrap gap-4 pt-1">
+                      <label className="flex items-center gap-2 cursor-pointer group">
+                        <input type="radio" name="program" value="PAUD" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                        <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">PAUD</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer group">
+                        <input type="radio" name="program" value="TK" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                        <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK</span>
+                      </label>
+                    </div>
+                  </div>
+
                   {/* Nama Anak */}
                   <div className="space-y-2">
-                    <label className="block font-label-md text-label-md text-primary" htmlFor="nama_anak">Nama Lengkap Anak</label>
+                    <label className="block font-label-md text-label-md text-primary" htmlFor="nama_anak">Nama Lengkap Anak <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       id="nama_anak"
+                      name="nama_anak"
+                      required
                       className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                       placeholder="Masukkan nama lengkap anak sesuai Akta Kelahiran" />
                   </div>
@@ -773,9 +835,9 @@ export default function Pendaftaran() {
                     Kembali
                   </button>
                 )}
-                <button className="w-full sm:w-auto px-8 py-3 font-label-md text-label-md text-white bg-[#C89B53] hover:bg-[#b08544] hover:shadow-[0_4px_15px_rgba(200,155,83,0.4)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 font-bold rounded-full" type="submit">
-                  {step === 4 ? "Kirim Pendaftaran" : "Lanjutkan"}
-                  {step === 4 ? <span className="material-symbols-outlined text-[18px]">send</span> : <span className="material-symbols-outlined text-[18px]">arrow_forward</span>}
+                <button disabled={isSubmitting} className="w-full sm:w-auto px-8 py-3 font-label-md text-label-md text-white bg-[#C89B53] hover:bg-[#b08544] hover:shadow-[0_4px_15px_rgba(200,155,83,0.4)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 font-bold rounded-full disabled:opacity-50 disabled:cursor-not-allowed" type="submit">
+                  {isSubmitting ? "Mengirim..." : step === 4 ? "Kirim Pendaftaran" : "Lanjutkan"}
+                  {!isSubmitting && (step === 4 ? <span className="material-symbols-outlined text-[18px]">send</span> : <span className="material-symbols-outlined text-[18px]">arrow_forward</span>)}
                 </button>
               </div>
             </form>
