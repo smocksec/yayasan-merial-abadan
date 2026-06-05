@@ -25,6 +25,12 @@ export default async function Login(props: { searchParams: Promise<{ message?: s
       return redirect("/login?message=Email atau password yang Anda masukkan salah.");
     }
 
+    // Jika yang login adalah admin, arahkan ke halaman admin
+    if (email === "aufarifqi119@gmail.com") {
+      return redirect("/admin");
+    }
+
+    // Selain itu (orang tua), arahkan ke dashboard reguler
     return redirect("/dashboard");
   };
 
