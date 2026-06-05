@@ -1,26 +1,43 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Dashboard() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <div className="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row -mt-20">
+    <div className="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row -mt-20 relative">
       {/* Top Navigation (Mobile Only) */}
-      <header className="md:hidden bg-surface dark:bg-surface-container-low w-full z-50 flex justify-between items-center px-margin-mobile py-4 shadow-[0_4px_20px_rgba(23,46,64,0.05)] border-b border-outline-variant mt-20">
+      <header className="md:hidden bg-surface dark:bg-surface-container-low w-full z-40 flex justify-between items-center px-margin-mobile py-4 shadow-[0_4px_20px_rgba(23,46,64,0.05)] border-b border-outline-variant mt-20 relative">
         <div className="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">
-          Yayasan Merial Abadan Madani
+          Merial Abadan Madani
         </div>
-        <button className="text-on-surface">
-          <span className="material-symbols-outlined text-3xl">menu</span>
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-on-surface p-2 -mr-2">
+          <span className="material-symbols-outlined text-3xl">{isMobileMenuOpen ? "close" : "menu"}</span>
         </button>
       </header>
 
-      {/* Sidebar Navigation (Desktop) */}
-      <aside className="hidden md:flex flex-col w-64 bg-secondary text-on-secondary min-h-screen fixed left-0 top-0 shadow-[0_4px_20px_rgba(23,46,64,0.05)] z-40">
-        <div className="p-6 border-b border-on-secondary/20">
-          <h1 className="font-headline-md text-headline-md font-bold leading-tight">Yayasan Merial Abadan Madani</h1>
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-[#172E40]/50 z-40 backdrop-blur-sm transition-opacity"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar Navigation (Desktop & Mobile) */}
+      <aside className={`flex flex-col w-64 bg-secondary text-on-secondary min-h-screen fixed left-0 top-0 shadow-[0_4px_20px_rgba(23,46,64,0.05)] z-50 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+        <div className="p-6 border-b border-on-secondary/20 flex justify-between items-center">
+          <h1 className="font-headline-md text-headline-md font-bold leading-tight">Yayasan Merial Abadan</h1>
+          <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(false)}>
+            <span className="material-symbols-outlined">close</span>
+          </button>
         </div>
-        <nav className="flex-1 py-6 px-4 space-y-2">
+        <nav className="flex-1 py-6 px-4 space-y-2 overflow-y-auto">
           <Link
             href="/dashboard"
+            onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 px-4 py-3 bg-on-secondary text-secondary font-label-md text-label-md font-bold transition-all shadow-sm rounded-xl"
           >
             <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>home</span>
@@ -28,6 +45,7 @@ export default function Dashboard() {
           </Link>
           <Link
             href="#"
+            onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 px-4 py-3 text-on-secondary/80 hover:text-on-secondary hover:bg-on-secondary/10 font-label-md text-label-md transition-colors rounded-xl"
           >
             <span className="material-symbols-outlined">child_care</span>
@@ -35,6 +53,7 @@ export default function Dashboard() {
           </Link>
           <Link
             href="/pendaftaran"
+            onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 px-4 py-3 text-on-secondary/80 hover:text-on-secondary hover:bg-on-secondary/10 font-label-md text-label-md transition-colors rounded-xl"
           >
             <span className="material-symbols-outlined">app_registration</span>
@@ -42,6 +61,7 @@ export default function Dashboard() {
           </Link>
           <Link
             href="#"
+            onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 px-4 py-3 text-on-secondary/80 hover:text-on-secondary hover:bg-on-secondary/10 font-label-md text-label-md transition-colors rounded-xl"
           >
             <span className="material-symbols-outlined">receipt_long</span>
@@ -49,6 +69,7 @@ export default function Dashboard() {
           </Link>
           <Link
             href="#"
+            onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 px-4 py-3 text-on-secondary/80 hover:text-on-secondary hover:bg-on-secondary/10 font-label-md text-label-md transition-colors rounded-xl"
           >
             <span className="material-symbols-outlined">settings</span>
