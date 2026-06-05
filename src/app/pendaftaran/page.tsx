@@ -619,6 +619,24 @@ export default function Pendaftaran() {
                       placeholder="Masukkan alamat lengkap tempat tinggal"
                       rows={3}></textarea>
                   </div>
+
+                  {/* Titik Lokasi Peta (Google Maps Link) */}
+                  <div className="space-y-3 pt-2">
+                    <label className="block font-label-md text-label-md text-primary" htmlFor="link_maps">Titik Lokasi (Pin) Google Maps <span className="font-normal text-on-surface-variant">(Disarankan)</span></label>
+                    <p className="font-caption text-caption text-on-surface-variant">Buka Google Maps, cari alamat rumah Anda, klik "Bagikan" (Share) lalu "Salin Link" (Copy Link) dan tempel di bawah ini.</p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <input
+                        type="url"
+                        id="link_maps"
+                        className="flex-1 border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
+                        placeholder="Contoh: https://maps.app.goo.gl/..."
+                      />
+                      <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" className="px-6 py-3 font-label-md text-label-md text-white bg-primary hover:bg-[#122432] transition-colors flex items-center justify-center gap-2 rounded-xl whitespace-nowrap shadow-sm hover:shadow-md">
+                        <span className="material-symbols-outlined text-[18px]">location_on</span>
+                        Buka Peta
+                      </a>
+                    </div>
+                  </div>
                 </div>
               )}
 
