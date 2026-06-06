@@ -63,7 +63,7 @@ export default function Dashboard() {
       {/* Sidebar Navigation (Desktop & Mobile) */}
       <aside className={`flex flex-col w-64 bg-secondary text-on-secondary min-h-screen fixed left-0 top-0 shadow-[0_4px_20px_rgba(23,46,64,0.05)] z-50 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className="p-6 border-b border-on-secondary/20 flex justify-between items-center">
-          <h1 className="font-headline-md text-headline-md font-bold leading-tight">Yayasan Merial Abadan</h1>
+          <h1 className="font-headline-md text-headline-md font-bold leading-tight">Yayasan Merial Abadan Madani</h1>
           <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(false)}>
             <span className="material-symbols-outlined">close</span>
           </button>
