@@ -46,10 +46,13 @@ export default function Navbar() {
           Kontak
         </Link>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-4">
+        <Link href="/login" className="hidden md:block font-label-md text-label-md font-bold text-primary hover:text-secondary transition-colors">
+          Masuk
+        </Link>
         <Link href="/register">
           <button className="bg-[#C89B53] text-white font-label-md text-label-md px-6 py-2 rounded-full font-bold hover:opacity-90 shadow-md transition-all">
-            Daftar Sekarang
+            Daftar
           </button>
         </Link>
         <button className="md:hidden ml-4 text-primary">

@@ -23,11 +23,18 @@ export default function Home() {
             <p className="font-body-lg text-body-lg text-on-primary/90 max-w-2xl drop-shadow-md">
               Membangun generasi cerdas berkarakter madani melalui pendidikan berkualitas yang memadukan nilai-nilai spiritual dan keunggulan akademik modern.
             </p>
-            <Link href="/register">
-              <button className="bg-[#C89B53] text-white font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 hover:shadow-xl shadow-lg transition-all duration-300">
-                Mulai Pendaftaran
-              </button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+              <Link href="/register">
+                <button className="bg-[#C89B53] text-white font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 hover:shadow-xl shadow-lg transition-all duration-300 w-full sm:w-auto">
+                  Mulai Pendaftaran
+                </button>
+              </Link>
+              <Link href="/login">
+                <button className="bg-surface/10 text-white backdrop-blur-md border border-white/30 font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 hover:bg-surface/20 shadow-lg transition-all duration-300 w-full sm:w-auto">
+                  Sudah punya akun? Masuk
+                </button>
+              </Link>
+            </div>
           </div>
         </header>
 
@@ -246,11 +253,17 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="mt-16 flex justify-center relative z-10">
+          <div className="mt-16 flex flex-col sm:flex-row justify-center items-center gap-4 relative z-10">
             <Link href="/register">
-              <button className="bg-[#C89B53] text-white font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 shadow-[0_8px_20px_rgba(200,155,83,0.3)] transition-all duration-300 flex items-center gap-3">
-                <span className="material-symbols-outlined">login</span>
+              <button className="bg-[#C89B53] text-white font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 shadow-[0_8px_20px_rgba(200,155,83,0.3)] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto">
+                <span className="material-symbols-outlined">person_add</span>
                 Mulai Pendaftaran
+              </button>
+            </Link>
+            <Link href="/login">
+              <button className="bg-surface text-primary border border-primary/20 font-label-md text-label-md px-8 py-3 rounded-full font-bold hover:-translate-y-1 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto">
+                <span className="material-symbols-outlined">login</span>
+                Masuk ke Dashboard
               </button>
             </Link>
           </div>
