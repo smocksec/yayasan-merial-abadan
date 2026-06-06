@@ -107,7 +107,7 @@ export default function Home() {
                   <img
                     alt="PAUD/TK"
                     className="w-full h-56 object-cover rounded-[2rem]"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eksXypZWfPW9bl9Th80-FLesXf9CvJgE6_XYJvWOCFtZkl1VGQDtxzz7B4uzqKysiVX1um4abl40Ypg2poN0TXgMnIy6lelViSWxvY2oquhYtB8QRo1HiCSILSsQJcbAvfEKVeXGR6ZWZJQ8zlRM7zgLSIwSEwGh2MJ2Ele9Iw-qoCyEdQ3_JUMr-303cZ-NsNR6Tc3WOEuICNTPFF_RiZwPbWWE149ADz0nVqWpiENo5hpBlMXrJJZphoQxZNpHBME4HPHDp4I"
+                    src="/paud_tk_hijab.png"
                   />
                 </div>
                 <div className="p-8 flex flex-col gap-4">
@@ -122,9 +122,9 @@ export default function Home() {
                     <span className="font-caption text-caption bg-surface-variant px-3 py-1 rounded-full">
                       Usia 3-6 Tahun
                     </span>
-                    <span className="font-caption text-caption font-medium text-secondary">
-                      Buka Pendaftaran
-                    </span>
+                    <Link href="/program" className="font-caption text-caption font-medium text-secondary hover:underline cursor-pointer">
+                      Lihat Detail
+                    </Link>
                   </div>
                 </div>
               </div>
