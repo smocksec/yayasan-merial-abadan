@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 export default async function AdminDashboard() {
   const cookieStore = await cookies();
@@ -21,6 +22,26 @@ export default async function AdminDashboard() {
 
   // Menangani potensi error (misal jika tabel belum dibuat)
   const displayData = registrations || [];
+
+  // Mengambil total user dari auth.users (Membutuhkan SUPABASE_SERVICE_ROLE_KEY di .env.local)
+  let totalBelumIsiForm = 0;
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const supabaseAdmin = createSupabaseClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+    const { data: usersData, error: usersError } = await supabaseAdmin.auth.admin.listUsers();
+    
+    if (!usersError && usersData?.users) {
+      // Kecualikan admin dari perhitungan
+      const totalUsers = usersData.users.filter(u => u.email !== 'aufarifqi119@gmail.com').length;
+      
+      // Hitung yang belum mengisi form:
+      // Total user (non-admin) dikurangi total pendaftar unik (berdasarkan user_id)
+      const userIdsWithForm = new Set(displayData.filter(r => r.user_id).map(r => r.user_id));
+      totalBelumIsiForm = Math.max(0, totalUsers - userIdsWithForm.size);
+    }
+  }
 
   // Hitung Statistik
   const totalPendaftar = displayData.length;
@@ -53,8 +74,8 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-5 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
           <div className="flex items-center justify-between mb-4 relative z-10">
             <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
@@ -66,7 +87,7 @@ export default async function AdminDashboard() {
           <p className="font-caption text-caption text-on-surface-variant relative z-10">Total pendaftar saat ini</p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-5 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#C89B53]/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
           <div className="flex items-center justify-between mb-4 relative z-10">
             <div className="w-12 h-12 bg-[#C89B53]/10 rounded-2xl flex items-center justify-center text-[#C89B53]">
@@ -78,7 +99,7 @@ export default async function AdminDashboard() {
           <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar PAUD</p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-5 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
           <div className="flex items-center justify-between mb-4 relative z-10">
             <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
@@ -90,7 +111,7 @@ export default async function AdminDashboard() {
           <p className="font-caption text-caption text-on-surface-variant relative z-10">Siswa terdaftar TK</p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-5 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#E53935]/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
           <div className="flex items-center justify-between mb-4 relative z-10">
             <div className="w-12 h-12 bg-[#E53935]/10 rounded-2xl flex items-center justify-center text-[#E53935]">
@@ -100,6 +121,18 @@ export default async function AdminDashboard() {
           </div>
           <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalMenunggu}</p>
           <p className="font-caption text-caption text-[#E53935] relative z-10 font-bold">Perlu verifikasi Anda</p>
+        </div>
+
+        <div className="bg-surface-container-lowest border border-surface-container rounded-3xl p-5 shadow-[0_4px_20px_rgba(23,46,64,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-gray-500/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+          <div className="flex items-center justify-between mb-4 relative z-10">
+            <div className="w-12 h-12 bg-gray-500/10 rounded-2xl flex items-center justify-center text-gray-500">
+              <span className="material-symbols-outlined text-[24px]">person_off</span>
+            </div>
+            <span className="font-title-md text-title-md text-primary" title="User terdaftar tapi belum isi formulir pendaftaran">Pending</span>
+          </div>
+          <p className="font-display-sm text-display-sm text-primary mb-1 relative z-10">{totalBelumIsiForm}</p>
+          <p className="font-caption text-caption text-on-surface-variant relative z-10">Belum isi formulir</p>
         </div>
       </div>
 
