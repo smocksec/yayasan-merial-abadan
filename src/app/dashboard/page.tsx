@@ -41,9 +41,9 @@ export default function Dashboard() {
   const totalTagihan = 0;
 
   return (
-    <div className="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row -mt-20 relative">
+    <div className="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row relative">
       {/* Top Navigation (Mobile Only) */}
-      <header className="md:hidden bg-surface dark:bg-surface-container-low w-full z-40 flex justify-between items-center px-margin-mobile py-4 shadow-[0_4px_20px_rgba(23,46,64,0.05)] border-b border-outline-variant mt-20 relative">
+      <header className="md:hidden bg-surface dark:bg-surface-container-low w-full z-40 flex justify-between items-center px-margin-mobile py-4 shadow-[0_4px_20px_rgba(23,46,64,0.05)] border-b border-outline-variant relative">
         <div className="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">
           Merial Abadan Madani
         </div>
@@ -220,21 +220,6 @@ export default function Dashboard() {
               </Link>
             </section>
 
-            {/* Info Yayasan Widget */}
-            <section
-              className="bg-secondary text-on-secondary p-6 shadow-sm flex flex-col justify-between min-h-[200px] relative overflow-hidden bg-cover bg-center rounded-3xl border border-transparent"
-              style={{
-                backgroundImage: 'linear-gradient(to right, rgba(52, 102, 101, 0.9), rgba(52, 102, 101, 0.7)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-n7335uJFAZOHZELkJ1w0J5jJQeGrxrDiAuPgfMIBCuPvD8Hw3459P_bO7_JTAL6cuyJ8AJ16rY0Iku0cQw40DevyO86gXCbpSt_cw9sPQmGyY-Iel75Ee7tgnY9bf5ZiIfWXGCjERFGhL94VoLAz1Xgzxt9pTIxrR_6i3JDVscx4unRn1ZpbjAxvJx1w8Jtcwu5DXpcai9H8F1JNVCWuYqHjRYhadQCMswl3OgjmB8-QfZRs9Kv1XrYXRj95DQVT5AKR8abOp58")'
-              }}
-            >
-              <div className="relative z-10">
-                <h3 className="font-headline-md text-headline-md mb-2">Pendaftaran Siswa Baru 2025/2026</h3>
-                <p className="font-body-md text-body-md opacity-90 mb-4 text-sm">Dapatkan potongan khusus untuk pendaftaran gelombang pertama.</p>
-              </div>
-              <button className="relative z-10 w-max bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-4 py-2 hover:bg-tertiary-fixed-dim transition-colors border border-transparent rounded-full">
-                Info Selengkapnya
-              </button>
-            </section>
           </div>
         </div>
       </main>
