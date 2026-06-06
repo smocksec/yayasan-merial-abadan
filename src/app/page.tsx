@@ -133,22 +133,22 @@ export default function Home() {
               <div className="bg-surface rounded-[2.5rem] overflow-hidden shadow-[0_8px_30px_rgba(23,46,64,0.08)] hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(23,46,64,0.12)]">
                 <div className="p-2 pb-0">
                   <img
-                    alt="SD"
+                    alt="Lembaga Ziswaf"
                     className="w-full h-56 object-cover rounded-[2rem]"
-                    src="/sd_islamic.png"
+                    src="/ziswaf_illustration.png"
                   />
                 </div>
                 <div className="p-8 flex flex-col gap-4">
                   <span className="text-secondary font-label-md text-label-md bg-secondary/10 px-4 py-1.5 rounded-full w-fit">
-                    Sekolah Dasar
+                    Sosial & Keagamaan
                   </span>
-                  <h3 className="font-headline-md text-headline-md text-primary">SD Merial Abadan</h3>
+                  <h3 className="font-headline-md text-headline-md text-primary">Lembaga Ziswaf</h3>
                   <p className="font-body-md text-body-md text-on-surface-variant line-clamp-3">
-                    Mengembangkan potensi akademik dan spiritual siswa. Kurikulum terintegrasi yang menekankan pada penguasaan sains, teknologi, serta pendalaman ilmu agama dan karakter unggul.
+                    Mengelola dana amanah untuk pemberdayaan umat dan kesejahteraan masyarakat yang membutuhkan.
                   </p>
                   <div className="mt-4 pt-4 border-t border-outline-variant/30 flex justify-between items-center text-on-surface-variant">
                     <span className="font-caption text-caption bg-surface-variant px-3 py-1 rounded-full">
-                      Kelas 1-6
+                      Zakat & Sedekah
                     </span>
                     <Link href="/program" className="font-caption text-caption font-medium text-secondary hover:underline cursor-pointer">
                       Lihat Detail
