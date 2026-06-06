@@ -33,7 +33,7 @@ export default async function Register(props: { searchParams: Promise<{ message?
       return redirect("/register?message=Gagal mendaftar: " + error.message);
     }
 
-    return redirect("/login?message=Pendaftaran berhasil! Silakan login untuk melanjutkan.");
+    return redirect("/login?message=Akun berhasil dibuat! Silakan cek email Anda untuk memverifikasi pendaftaran. Setelah verifikasi, Anda WAJIB login dan melengkapi Formulir Pendaftaran Siswa.");
   };
 
   return (
@@ -50,6 +50,18 @@ export default async function Register(props: { searchParams: Promise<{ message?
         <div className="w-full mb-6">
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary-container mb-2">Buat Akun Baru</h2>
           <p className="font-body-md text-body-md text-on-surface-variant">Silakan daftar menggunakan email Anda.</p>
+        </div>
+
+        <div className="w-full mb-6 p-4 bg-primary/10 border border-primary/20 rounded-xl text-left">
+          <h3 className="font-label-md text-label-md text-primary font-bold mb-2 flex items-center gap-2">
+            <span className="material-symbols-outlined text-[20px]">info</span>
+            Informasi Pendaftaran
+          </h3>
+          <p className="font-caption text-caption text-on-surface-variant leading-relaxed">
+            Proses pendaftaran memiliki 2 tahapan: <br/>
+            <strong>1. Buat Akun</strong> (Di halaman ini) <br/>
+            <strong>2. Isi Formulir Siswa</strong> (Setelah akun diverifikasi via email, silakan login untuk mengisi data anak Anda)
+          </p>
         </div>
 
         {searchParams?.message && (

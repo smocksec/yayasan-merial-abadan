@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(`${origin}/login?message=Email berhasil diverifikasi! Silakan login untuk melanjutkan dan melengkapi formulir pendaftaran.`)
     } else {
       return NextResponse.redirect(`${origin}/login?message=Gagal verifikasi email: ${error.message}`)
     }
