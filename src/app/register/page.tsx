@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logoYayasan from "../../../public/logo-yayasan.jpg";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -15,10 +15,18 @@ export default async function Register(props: { searchParams: Promise<{ message?
     
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
+    
+    const headersList = await headers();
+    const host = headersList.get("host") || "localhost:3000";
+    const protocol = headersList.get("x-forwarded-proto") || "http";
+    const origin = `${protocol}://${host}`;
 
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      }
     });
 
     if (error) {
