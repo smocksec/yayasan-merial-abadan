@@ -76,110 +76,108 @@ export default function Profil() {
 
         {/* Organization Structure Widget */}
         <section className="py-section-gap px-margin-mobile md:px-margin-desktop">
-          {/* Hierarchy Flow Chart */}
-          <div className="border-[4px] md:border-[6px] border-black p-6 md:p-16 bg-white max-w-4xl mx-auto flex flex-col items-center relative font-sans overflow-x-auto overflow-y-hidden shadow-lg">
+          <div className="bg-surface rounded-[2.5rem] p-8 md:p-16 shadow-[0_8px_30px_rgba(23,46,64,0.08)] max-w-5xl mx-auto flex flex-col items-center relative overflow-x-auto overflow-y-hidden">
             <div className="text-center mb-12">
-              <h2 className="font-headline-lg text-headline-lg text-black uppercase font-bold mb-2">Struktur Organisasi</h2>
-              <h3 className="font-headline-md text-headline-md text-[#4CAF50] uppercase font-bold">Yayasan Merial Abadan</h3>
+              <h2 className="font-headline-lg text-headline-lg text-primary mb-2">Susunan Pengurus</h2>
+              <h3 className="font-headline-md text-headline-md text-secondary">Yayasan Merial Abadan</h3>
             </div>
 
             <div className="min-w-[600px] flex flex-col items-center">
               {/* Ketua Pembina */}
-              <div className="border-2 border-[#4CAF50] p-4 w-64 text-center bg-white z-10">
-                <div className="text-sm underline mb-1 uppercase text-black font-semibold">Ketua Pembina</div>
-                <div className="font-bold text-black uppercase">Fakhrurrazi</div>
+              <div className="border border-secondary/30 bg-surface p-5 w-64 text-center rounded-2xl shadow-sm relative z-10 hover:shadow-md transition-shadow">
+                <div className="font-label-md text-label-md text-secondary uppercase mb-1">Ketua Pembina</div>
+                <div className="font-headline-md text-headline-md text-primary">Fakhrurrazi</div>
               </div>
               
               {/* Anggota Pembina Branch */}
               <div className="flex w-full">
-                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
-                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
+                <div className="w-1/2 border-r-[2px] border-secondary/30 relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-[2px] border-secondary/30 absolute top-1/2 right-0 translate-x-full"></div>
                 </div>
                 <div className="w-1/2 flex items-center pl-8 md:pl-12">
-                  <div className="border-2 border-[#4CAF50] p-4 w-64 text-center bg-white z-10">
-                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Anggota Pembina</div>
-                    <div className="font-bold text-black uppercase">Syarafina</div>
+                  <div className="border border-secondary/30 bg-surface p-5 w-64 text-center rounded-2xl shadow-sm relative z-10 hover:shadow-md transition-shadow">
+                    <div className="font-label-md text-label-md text-secondary uppercase mb-1">Anggota Pembina</div>
+                    <div className="font-headline-md text-headline-md text-primary">Syarafina</div>
                   </div>
                 </div>
               </div>
 
               {/* Pengawas Branch */}
               <div className="flex w-full">
-                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
-                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
+                <div className="w-1/2 border-r-[2px] border-secondary/30 relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-[2px] border-secondary/30 absolute top-1/2 right-0 translate-x-full"></div>
                 </div>
                 <div className="w-1/2 flex items-center pl-8 md:pl-12">
-                  <div className="border-2 border-[#2196F3] p-4 w-64 text-center bg-white z-10">
-                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Pengawas</div>
-                    <div className="font-bold text-black uppercase">Husaini</div>
+                  <div className="border border-primary/20 bg-surface p-5 w-64 text-center rounded-2xl shadow-sm relative z-10 hover:shadow-md transition-shadow">
+                    <div className="font-label-md text-label-md text-primary uppercase mb-1">Pengawas</div>
+                    <div className="font-headline-md text-headline-md text-primary">Husaini</div>
                   </div>
                 </div>
               </div>
 
               {/* Vertical Line down to Ketua Pengurus */}
               <div className="flex w-full">
-                <div className="w-1/2 border-r-2 border-black h-10"></div>
+                <div className="w-1/2 border-r-[2px] border-secondary/30 h-10"></div>
                 <div className="w-1/2"></div>
               </div>
 
               {/* Ketua Pengurus */}
-              <div className="border-2 border-[#FF9800] p-4 w-64 text-center bg-white z-10 relative">
-                <div className="text-sm underline mb-1 uppercase text-black font-semibold">Ketua Pengurus</div>
-                <div className="font-bold text-black uppercase">Cut Bungsu Rahayu</div>
+              <div className="border border-[#C89B53]/30 bg-surface p-5 w-64 text-center rounded-2xl shadow-sm relative z-10 hover:shadow-md transition-shadow">
+                <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Ketua Pengurus</div>
+                <div className="font-headline-md text-headline-md text-primary">Cut Bungsu Rahayu</div>
               </div>
 
               {/* Wakil Ketua Branch */}
               <div className="flex w-full">
-                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
-                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
+                <div className="w-1/2 border-r-[2px] border-secondary/30 relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-[2px] border-secondary/30 absolute top-1/2 right-0 translate-x-full"></div>
                 </div>
                 <div className="w-1/2 flex items-center pl-8 md:pl-12">
-                  <div className="border-2 border-[#FF9800] p-4 w-64 text-center bg-white z-10">
-                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Wakil Ketua</div>
-                    <div className="font-bold text-black uppercase">Achmad Luthfi</div>
+                  <div className="border border-[#C89B53]/30 bg-surface p-5 w-64 text-center rounded-2xl shadow-sm relative z-10 hover:shadow-md transition-shadow">
+                    <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Wakil Ketua</div>
+                    <div className="font-headline-md text-headline-md text-primary">Achmad Luthfi</div>
                   </div>
                 </div>
               </div>
 
               {/* Vertical Line down to Horizontal Split */}
               <div className="flex w-full">
-                <div className="w-1/2 border-r-2 border-black h-12"></div>
+                <div className="w-1/2 border-r-[2px] border-secondary/30 h-12"></div>
                 <div className="w-1/2"></div>
               </div>
 
               {/* Horizontal Split */}
-              <div className="w-[380px] md:w-[460px] border-t-2 border-black flex justify-between relative">
-                <div className="w-0.5 h-6 bg-black"></div>
-                <div className="w-0.5 h-6 bg-black"></div>
+              <div className="w-[380px] md:w-[460px] border-t-[2px] border-secondary/30 flex justify-between relative">
+                <div className="w-[2px] h-6 bg-secondary/30"></div>
+                <div className="w-[2px] h-6 bg-secondary/30"></div>
               </div>
 
               {/* Sekretaris & Bendahara */}
-              <div className="w-[380px] md:w-[460px] relative h-28 mt-0">
-                <div className="absolute left-0 top-0 border-2 border-[#FF9800] p-4 w-44 md:w-56 text-center bg-white transform -translate-x-1/2">
-                  <div className="text-sm underline mb-1 uppercase text-black font-semibold">Sekretaris</div>
-                  <div className="font-bold text-black uppercase">Aufa Rifqi</div>
+              <div className="w-[380px] md:w-[460px] relative h-32 mt-0">
+                <div className="absolute left-0 top-0 border border-[#C89B53]/30 bg-surface p-5 w-44 md:w-56 text-center rounded-2xl shadow-sm z-10 transform -translate-x-1/2 hover:-translate-y-1 hover:shadow-md transition-all">
+                  <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Sekretaris</div>
+                  <div className="font-headline-md text-headline-md text-primary text-lg md:text-xl">Aufa Rifqi</div>
                 </div>
-                <div className="absolute right-0 top-0 border-2 border-[#FF9800] p-4 w-44 md:w-56 text-center bg-white transform translate-x-1/2">
-                  <div className="text-sm underline mb-1 uppercase text-black font-semibold">Bendahara</div>
-                  <div className="font-bold text-black uppercase">Afkaar Zharif</div>
+                <div className="absolute right-0 top-0 border border-[#C89B53]/30 bg-surface p-5 w-44 md:w-56 text-center rounded-2xl shadow-sm z-10 transform translate-x-1/2 hover:-translate-y-1 hover:shadow-md transition-all">
+                  <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Bendahara</div>
+                  <div className="font-headline-md text-headline-md text-primary text-lg md:text-xl">Afkaar Zharif</div>
                 </div>
               </div>
             </div>
 
             {/* Legend */}
-            <div className="mt-8 md:mt-16 w-full max-w-[600px] text-black font-medium text-sm pl-4 md:pl-0">
-              <div className="mb-3">Keterangan :</div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-4 border-2 border-[#4CAF50] bg-white"></div>
-                <span>= Dewan Pembina</span>
+            <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-6 w-full text-on-surface-variant font-body-md">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-secondary"></div>
+                <span>Dewan Pembina</span>
               </div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-4 border-2 border-[#2196F3] bg-white"></div>
-                <span>= Dewan Pengawas</span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-primary"></div>
+                <span>Dewan Pengawas</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-4 border-2 border-[#FF9800] bg-white"></div>
-                <span>= Dewan Pengurus</span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-[#C89B53]"></div>
+                <span>Dewan Pengurus</span>
               </div>
             </div>
             
