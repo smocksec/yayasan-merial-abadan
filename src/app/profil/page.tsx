@@ -75,57 +75,114 @@ export default function Profil() {
         </section>
 
         {/* Organization Structure Widget */}
-        <section className="py-section-gap">
-          <div className="text-center mb-16">
-            <h2 className="font-headline-lg text-headline-lg text-primary mb-4">Struktur Organisasi</h2>
-            <div className="w-24 h-1 bg-[#C89B53] mx-auto mb-6"></div>
-            <p className="text-on-surface-variant max-w-2xl mx-auto">
-              Dipimpin oleh para profesional dan ulama yang berdedikasi tinggi dalam mewujudkan misi peradaban.
-            </p>
-          </div>
+        <section className="py-section-gap px-margin-mobile md:px-margin-desktop">
           {/* Hierarchy Flow Chart */}
-          <div className="flex flex-col items-center">
-            {/* Level 1 */}
-            <div className="bg-white border-2 border-secondary p-6 w-72 text-center shadow-md relative rounded-xl">
-              <h4 className="font-label-md text-label-md text-secondary uppercase mb-1">Ketua Dewan Pembina</h4>
-              <p className="font-headline-md text-headline-md text-primary">Dr. H. Ahmad Ma'ruf</p>
+          <div className="border-[4px] md:border-[6px] border-black p-6 md:p-16 bg-white max-w-4xl mx-auto flex flex-col items-center relative font-sans overflow-x-auto overflow-y-hidden shadow-lg">
+            <div className="text-center mb-12">
+              <h2 className="font-headline-lg text-headline-lg text-black uppercase font-bold mb-2">Struktur Organisasi</h2>
+              <h3 className="font-headline-md text-headline-md text-[#4CAF50] uppercase font-bold">Yayasan Merial Abadan</h3>
             </div>
-            <div className="w-0.5 bg-secondary h-6"></div>
-            {/* Level 2 */}
-            <div className="flex gap-gutter items-center justify-center w-full">
-              <div className="bg-white border-2 border-secondary p-6 w-72 text-center shadow-md rounded-xl">
-                <h4 className="font-label-md text-label-md text-secondary uppercase mb-1">Ketua Yayasan</h4>
-                <p className="font-headline-md text-headline-md text-primary">Ir. Budi Santoso, M.Si</p>
+
+            <div className="min-w-[600px] flex flex-col items-center">
+              {/* Ketua Pembina */}
+              <div className="border-2 border-[#4CAF50] p-4 w-64 text-center bg-white z-10">
+                <div className="text-sm underline mb-1 uppercase text-black font-semibold">Ketua Pembina</div>
+                <div className="font-bold text-black uppercase">Fakhrurrazi</div>
               </div>
-            </div>
-            <div className="w-0.5 bg-secondary h-6"></div>
-            {/* Level 3 */}
-            <div className="relative w-full max-w-5xl">
-              <div className="absolute top-0 left-1/2 w-3/4 -translate-x-1/2 h-0.5 bg-secondary"></div>
-              <div className="flex justify-between mt-0 relative z-10">
-                <div className="flex flex-col items-center flex-1">
-                  <div className="w-0.5 bg-secondary h-6"></div>
-                  <div className="bg-white border-2 border-secondary p-5 w-60 text-center shadow-md rounded-xl">
-                    <h4 className="font-label-md text-label-md text-secondary uppercase mb-1">Bid. Pendidikan</h4>
-                    <p className="font-headline-md text-headline-md text-primary text-lg">Hj. Siti Aminah</p>
-                  </div>
+              
+              {/* Anggota Pembina Branch */}
+              <div className="flex w-full">
+                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
                 </div>
-                <div className="flex flex-col items-center flex-1">
-                  <div className="w-0.5 bg-secondary h-6"></div>
-                  <div className="bg-white border-2 border-secondary p-5 w-60 text-center shadow-md rounded-xl">
-                    <h4 className="font-label-md text-label-md text-secondary uppercase mb-1">Bid. Sosial</h4>
-                    <p className="font-headline-md text-headline-md text-primary text-lg">Drs. M. Ridwan</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center flex-1">
-                  <div className="w-0.5 bg-secondary h-6"></div>
-                  <div className="bg-white border-2 border-secondary p-5 w-60 text-center shadow-md rounded-xl">
-                    <h4 className="font-label-md text-label-md text-secondary uppercase mb-1">Bendahara</h4>
-                    <p className="font-headline-md text-headline-md text-primary text-lg">Lutfi Hakim, S.E.</p>
+                <div className="w-1/2 flex items-center pl-8 md:pl-12">
+                  <div className="border-2 border-[#4CAF50] p-4 w-64 text-center bg-white z-10">
+                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Anggota Pembina</div>
+                    <div className="font-bold text-black uppercase">Syarafina</div>
                   </div>
                 </div>
               </div>
+
+              {/* Pengawas Branch */}
+              <div className="flex w-full">
+                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
+                </div>
+                <div className="w-1/2 flex items-center pl-8 md:pl-12">
+                  <div className="border-2 border-[#2196F3] p-4 w-64 text-center bg-white z-10">
+                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Pengawas</div>
+                    <div className="font-bold text-black uppercase">Husaini</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Vertical Line down to Ketua Pengurus */}
+              <div className="flex w-full">
+                <div className="w-1/2 border-r-2 border-black h-10"></div>
+                <div className="w-1/2"></div>
+              </div>
+
+              {/* Ketua Pengurus */}
+              <div className="border-2 border-[#FF9800] p-4 w-64 text-center bg-white z-10 relative">
+                <div className="text-sm underline mb-1 uppercase text-black font-semibold">Ketua Pengurus</div>
+                <div className="font-bold text-black uppercase">Cut Bungsu Rahayu</div>
+              </div>
+
+              {/* Wakil Ketua Branch */}
+              <div className="flex w-full">
+                <div className="w-1/2 border-r-2 border-black relative h-16 md:h-20">
+                  <div className="w-8 md:w-12 border-b-2 border-black absolute top-1/2 right-0 translate-x-full"></div>
+                </div>
+                <div className="w-1/2 flex items-center pl-8 md:pl-12">
+                  <div className="border-2 border-[#FF9800] p-4 w-64 text-center bg-white z-10">
+                    <div className="text-sm underline mb-1 uppercase text-black font-semibold">Wakil Ketua</div>
+                    <div className="font-bold text-black uppercase">Achmad Luthfi</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Vertical Line down to Horizontal Split */}
+              <div className="flex w-full">
+                <div className="w-1/2 border-r-2 border-black h-12"></div>
+                <div className="w-1/2"></div>
+              </div>
+
+              {/* Horizontal Split */}
+              <div className="w-[380px] md:w-[460px] border-t-2 border-black flex justify-between relative">
+                <div className="w-0.5 h-6 bg-black"></div>
+                <div className="w-0.5 h-6 bg-black"></div>
+              </div>
+
+              {/* Sekretaris & Bendahara */}
+              <div className="w-[380px] md:w-[460px] relative h-28 mt-0">
+                <div className="absolute left-0 top-0 border-2 border-[#FF9800] p-4 w-44 md:w-56 text-center bg-white transform -translate-x-1/2">
+                  <div className="text-sm underline mb-1 uppercase text-black font-semibold">Sekretaris</div>
+                  <div className="font-bold text-black uppercase">Aufa Rifqi</div>
+                </div>
+                <div className="absolute right-0 top-0 border-2 border-[#FF9800] p-4 w-44 md:w-56 text-center bg-white transform translate-x-1/2">
+                  <div className="text-sm underline mb-1 uppercase text-black font-semibold">Bendahara</div>
+                  <div className="font-bold text-black uppercase">Afkaar Zharif</div>
+                </div>
+              </div>
             </div>
+
+            {/* Legend */}
+            <div className="mt-8 md:mt-16 w-full max-w-[600px] text-black font-medium text-sm pl-4 md:pl-0">
+              <div className="mb-3">Keterangan :</div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-4 border-2 border-[#4CAF50] bg-white"></div>
+                <span>= Dewan Pembina</span>
+              </div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-4 border-2 border-[#2196F3] bg-white"></div>
+                <span>= Dewan Pengawas</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-4 border-2 border-[#FF9800] bg-white"></div>
+                <span>= Dewan Pengurus</span>
+              </div>
+            </div>
+            
           </div>
         </section>
 
