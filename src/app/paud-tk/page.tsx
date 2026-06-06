@@ -26,8 +26,8 @@ export default function PaudTkLanding() {
           <div className="relative rounded-3xl overflow-hidden shadow-[0_8px_30px_rgba(23,46,64,0.1)] group">
             <div className="w-full h-[500px] relative">
               <Image 
-                src="/paud_tk_hero.png" 
-                alt="Anak-anak PAUD & TK bermain ceria" 
+                src="/paud_tk_islami_hero.png" 
+                alt="Anak-anak PAUD & TK islami belajar ceria" 
                 fill 
                 className="object-cover transform group-hover:scale-105 transition-transform duration-700" 
               />
