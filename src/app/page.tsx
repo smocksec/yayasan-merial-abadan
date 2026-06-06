@@ -135,7 +135,7 @@ export default function Home() {
                   <img
                     alt="SD"
                     className="w-full h-56 object-cover rounded-[2rem]"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgxpdxURuR3RGSLyyBQ1gZ-_-NqM5TzoA_m7WxKtznN_Gir_8N8qekB5SbKcxYvJzTPJb8wX7HPeo8D_ImrOVpTwAYu7iRqkVtzXHX8HufDXq0KhChZsOxOh4Uyk13_uiWKy79f5SotCib8qt5nazgik36EFHT16RiIBq-UTqhbhG-bZ1Qd10FDmJtGJWgJfqaapKNv0i-X4_d18VxtKCNp1RaJuzenMfd7J2bEovB3LxluU7rDDGEPt0e95qPzZ7mS59LjH6X8Rc"
+                    src="/sd_islamic.png"
                   />
                 </div>
                 <div className="p-8 flex flex-col gap-4">
@@ -150,9 +150,9 @@ export default function Home() {
                     <span className="font-caption text-caption bg-surface-variant px-3 py-1 rounded-full">
                       Kelas 1-6
                     </span>
-                    <span className="font-caption text-caption font-medium text-[#C89B53]">
-                      Kuota Terbatas
-                    </span>
+                    <Link href="/program" className="font-caption text-caption font-medium text-secondary hover:underline cursor-pointer">
+                      Lihat Detail
+                    </Link>
                   </div>
                 </div>
               </div>
