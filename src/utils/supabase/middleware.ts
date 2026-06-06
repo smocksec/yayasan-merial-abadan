@@ -50,9 +50,17 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // Jika sudah login dan mencoba masuk ke halaman login/register
-  if (user && (path === '/login' || path === '/register')) {
+  // Jika sudah login dan mencoba masuk ke halaman login
+  if (user && path === '/login') {
+    if (user.email === 'aufarifqi119@gmail.com') {
+      return NextResponse.redirect(new URL('/admin', request.url))
+    }
     return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  // Jika sudah login dan mengklik tombol daftar/register, arahkan ke form pendaftaran
+  if (user && path === '/register') {
+    return NextResponse.redirect(new URL('/pendaftaran', request.url))
   }
 
   return supabaseResponse
