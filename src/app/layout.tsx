@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 import PageTransition from "@/components/PageTransition";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased pt-20">
         <PageTransition>{children}</PageTransition>
+        <WhatsAppWidget />
       </body>
     </html>
   );

@@ -117,18 +117,34 @@ export default function Pendaftaran() {
             <form onSubmit={handleNext} className="space-y-6">
               {step === 1 && (
                 <>
-                  {/* Program Pilihan */}
-                  <div className="space-y-3 mb-6">
-                    <label className="block font-label-md text-label-md text-primary font-bold">Pilih Program <span className="text-red-500">*</span></label>
-                    <div className="flex flex-wrap gap-4 pt-1">
-                      <label className="flex items-center gap-2 cursor-pointer group">
-                        <input type="radio" name="program" value="PAUD" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
-                        <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">PAUD</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer group">
-                        <input type="radio" name="program" value="TK" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
-                        <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK</span>
-                      </label>
+                  {/* Program Pilihan & Waktu Belajar */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 border-b border-surface-container pb-6">
+                    <div className="space-y-3">
+                      <label className="block font-label-md text-label-md text-primary font-bold">Tingkat Pendidikan <span className="text-red-500">*</span></label>
+                      <div className="flex flex-wrap gap-4 pt-1">
+                        <label className="flex items-center gap-2 cursor-pointer group">
+                          <input type="radio" name="program" value="PAUD" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">PAUD</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer group">
+                          <input type="radio" name="program" value="TK" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="block font-label-md text-label-md text-primary font-bold">Waktu Belajar <span className="text-red-500">*</span></label>
+                      <div className="flex flex-col gap-3 pt-1">
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input type="radio" name="waktu_belajar" value="Half Day" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Half Day <span className="text-on-surface-variant font-normal">(07:30 - 12:00)</span></span>
+                        </label>
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input type="radio" name="waktu_belajar" value="Full Day" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Full Day <span className="text-on-surface-variant font-normal">(07:30 - 17:00)</span></span>
+                        </label>
+                      </div>
                     </div>
                   </div>
 
