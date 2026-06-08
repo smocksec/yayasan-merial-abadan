@@ -73,11 +73,11 @@ export default async function Register(props: { searchParams: Promise<{ message?
         <form action={signUp} className="w-full space-y-4">
           <div className="text-left space-y-1">
             <label className="font-label-md text-label-md text-primary" htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" required className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="Anda@email.com" />
+            <input type="email" name="email" id="email" required className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="Contoh: abc@gmail.com" />
           </div>
           <div className="text-left space-y-1">
             <label className="font-label-md text-label-md text-primary" htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" required minLength={6} className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="Minimal 6 karakter" />
+            <input type="password" name="password" id="password" required minLength={6} className="w-full border border-outline-variant rounded-xl px-4 py-3 bg-surface-container-lowest" placeholder="Contoh: rahasia123" />
           </div>
           <button type="submit" className="w-full mt-4 py-3 px-6 bg-primary text-white font-label-md text-label-md rounded-full hover:bg-[#122432] transition-colors shadow-md">
             Daftar Sekarang
