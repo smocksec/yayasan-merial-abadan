@@ -164,7 +164,8 @@ export default async function AdminDashboard() {
               <tr className="bg-surface-container-low/50">
                 <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">ID Daftar</th>
                 <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Nama Anak</th>
-                <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Program</th>
+                <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Program & Waktu</th>
+                <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Layanan Tambahan</th>
                 <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Tanggal</th>
                 <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Kontak Ortu</th>
                 <th className="font-label-md text-label-md text-on-surface-variant font-bold py-4 px-6">Status</th>
@@ -174,7 +175,7 @@ export default async function AdminDashboard() {
             <tbody className="divide-y divide-surface-container">
               {displayData.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-on-surface-variant font-body-md">
+                  <td colSpan={8} className="py-8 text-center text-on-surface-variant font-body-md">
                     Belum ada data pendaftaran di Supabase.
                   </td>
                 </tr>
@@ -184,9 +185,26 @@ export default async function AdminDashboard() {
                     <td className="py-4 px-6 font-body-md text-body-md text-on-surface font-medium">{reg.id.substring(0, 8).toUpperCase()}</td>
                     <td className="py-4 px-6 font-body-md text-body-md text-primary font-bold">{reg.nama_anak}</td>
                     <td className="py-4 px-6">
-                      <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm ${reg.program === 'TK' ? 'bg-secondary/10 text-secondary' : 'bg-[#C89B53]/10 text-[#C89B53]'}`}>
-                        {reg.program || 'N/A'}
-                      </span>
+                      <div className="flex flex-col gap-1">
+                        <span className={`px-3 py-1 rounded-full font-label-sm text-label-sm w-fit ${reg.program === 'TK' ? 'bg-secondary/10 text-secondary' : 'bg-[#C89B53]/10 text-[#C89B53]'}`}>
+                          {reg.program || 'N/A'}
+                        </span>
+                        {reg.data_lengkap?.waktu_belajar && (
+                          <span className="font-caption text-caption text-on-surface-variant mt-0.5">{reg.data_lengkap.waktu_belajar}</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface">
+                        <div className="flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[16px] text-[#4A7C7A]">directions_car</span>
+                          <span>A. Jemput: <strong>{reg.data_lengkap?.antar_jemput || '-'}</strong></span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[16px] text-[#C89B53]">restaurant</span>
+                          <span>Catering: <strong>{reg.data_lengkap?.catering || '-'}</strong></span>
+                        </div>
+                      </div>
                     </td>
                     <td className="py-4 px-6 font-body-md text-body-md text-on-surface-variant">
                       {new Date(reg.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
