@@ -21,6 +21,8 @@ const NO_LAYOUT_ROUTES = [
   "/login",
   "/register",
   "/dashboard",
+  "/forgot-password",
+  "/update-password",
 ];
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {

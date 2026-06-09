@@ -19,7 +19,11 @@ export async function GET(request: Request) {
       }
       return NextResponse.redirect(`${origin}/login?message=Email berhasil diverifikasi! Silakan login untuk melanjutkan dan melengkapi formulir pendaftaran.`)
     } else {
-      return NextResponse.redirect(`${origin}/login?message=Gagal verifikasi email: ${error.message}`)
+      let errorMessage = error.message
+      if (errorMessage.includes("PKCE") || errorMessage.includes("code verifier")) {
+        errorMessage = "Tautan verifikasi dibuka di perangkat/browser yang berbeda. Silakan SALIN tautan verifikasi dari email Anda dan PASTE di browser yang sama saat Anda mendaftar."
+      }
+      return NextResponse.redirect(`${origin}/login?message=Gagal verifikasi email: ${errorMessage}`)
     }
   }
 
