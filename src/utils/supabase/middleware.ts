@@ -40,7 +40,7 @@ export const updateSession = async (request: NextRequest) => {
   // Proteksi khusus halaman Admin
   if (path.startsWith('/admin')) {
     // Jika belum login atau email bukan admin, tendang ke dashboard (atau login)
-    if (!user || user.email !== 'aufarifqi119@gmail.com') {
+    if (!user || user.email?.toLowerCase() !== 'aufarifqi119@gmail.com') {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   }
@@ -52,7 +52,7 @@ export const updateSession = async (request: NextRequest) => {
 
   // Jika sudah login dan mencoba masuk ke halaman login
   if (user && path === '/login') {
-    if (user.email === 'aufarifqi119@gmail.com') {
+    if (user.email?.toLowerCase() === 'aufarifqi119@gmail.com') {
       return NextResponse.redirect(new URL('/admin', request.url))
     }
     return NextResponse.redirect(new URL('/dashboard', request.url))

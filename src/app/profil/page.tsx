@@ -128,25 +128,25 @@ export default function Profil() {
               </div>
 
               {/* Sekretaris & Bendahara */}
-              <div className="w-[360px] md:w-[480px] flex justify-between relative z-10">
+              <div className="w-full sm:w-[360px] md:w-[480px] flex justify-between relative z-10 px-2 sm:px-0">
                 {/* Horizontal line */}
-                <div className="absolute top-0 left-1/2 w-[200px] md:w-[256px] h-[2px] bg-secondary/30 -translate-x-1/2"></div>
+                <div className="absolute top-0 left-1/2 w-[60%] sm:w-[200px] md:w-[256px] h-[2px] bg-secondary/30 -translate-x-1/2"></div>
                 
                 {/* Left Branch */}
-                <div className="relative flex flex-col items-center">
+                <div className="relative flex flex-col items-center w-[48%] sm:w-auto">
                   <div className="absolute top-0 w-[2px] h-8 bg-secondary/30"></div>
-                  <div className="border border-[#C89B53]/30 bg-surface p-5 w-40 md:w-56 text-center rounded-2xl shadow-sm relative z-10 hover:-translate-y-1 hover:shadow-md transition-all mt-8">
-                    <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Sekretaris</div>
-                    <div className="font-headline-md text-headline-md text-primary text-base md:text-xl">Aufa Rifqi</div>
+                  <div className="border border-[#C89B53]/30 bg-surface p-3 sm:p-5 w-full sm:w-40 md:w-56 text-center rounded-2xl shadow-sm relative z-10 hover:-translate-y-1 hover:shadow-md transition-all mt-8">
+                    <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1 text-xs sm:text-sm">Sekretaris</div>
+                    <div className="font-headline-md text-headline-md text-primary text-sm sm:text-base md:text-xl">Aufa Rifqi</div>
                   </div>
                 </div>
 
                 {/* Right Branch */}
-                <div className="relative flex flex-col items-center">
+                <div className="relative flex flex-col items-center w-[48%] sm:w-auto">
                   <div className="absolute top-0 w-[2px] h-8 bg-secondary/30"></div>
-                  <div className="border border-[#C89B53]/30 bg-surface p-5 w-40 md:w-56 text-center rounded-2xl shadow-sm relative z-10 hover:-translate-y-1 hover:shadow-md transition-all mt-8">
-                    <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1">Bendahara</div>
-                    <div className="font-headline-md text-headline-md text-primary text-base md:text-xl">Afkaar Zharif</div>
+                  <div className="border border-[#C89B53]/30 bg-surface p-3 sm:p-5 w-full sm:w-40 md:w-56 text-center rounded-2xl shadow-sm relative z-10 hover:-translate-y-1 hover:shadow-md transition-all mt-8">
+                    <div className="font-label-md text-label-md text-[#C89B53] uppercase mb-1 text-xs sm:text-sm">Bendahara</div>
+                    <div className="font-headline-md text-headline-md text-primary text-sm sm:text-base md:text-xl">Afkaar Zharif</div>
                   </div>
                 </div>
               </div>

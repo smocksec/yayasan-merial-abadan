@@ -26,7 +26,7 @@ export default async function Login(props: { searchParams: Promise<{ message?: s
     }
 
     // Jika yang login adalah admin, arahkan ke halaman admin
-    if (email === "aufarifqi119@gmail.com") {
+    if (email.toLowerCase() === "aufarifqi119@gmail.com") {
       return redirect("/admin");
     }
 

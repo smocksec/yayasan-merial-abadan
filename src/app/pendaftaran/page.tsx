@@ -76,32 +76,32 @@ export default function Pendaftaran() {
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-[2px] bg-surface-container-high -z-10"></div>
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 h-[2px] bg-[#C89B53] -z-10 transition-all duration-500 ease-in-out" style={{ width: `${(step - 1) * 33.33}%` }}></div>
             {/* Step 1 */}
-            <div className="flex flex-col items-center gap-2 bg-surface px-2">
-              <div className={`w-8 h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 1 ? 'bg-[#C89B53] text-white' : step === 1 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
-                {step > 1 ? <span className="material-symbols-outlined text-[18px]">check</span> : <span className="font-label-md text-label-md">1</span>}
+            <div className="flex flex-col items-center gap-1 md:gap-2 bg-surface px-1 md:px-2 w-1/4">
+              <div className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 1 ? 'bg-[#C89B53] text-white' : step === 1 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
+                {step > 1 ? <span className="material-symbols-outlined text-[14px] md:text-[18px]">check</span> : <span className="font-label-sm md:font-label-md text-[12px] md:text-sm">1</span>}
               </div>
-              <span className={`font-label-md text-label-md ${step >= 1 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Biodata Anak</span>
+              <span className={`text-[10px] md:text-sm text-center leading-tight ${step >= 1 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Biodata Anak</span>
             </div>
             {/* Step 2 */}
-            <div className="flex flex-col items-center gap-2 bg-surface px-2">
-              <div className={`w-8 h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 2 ? 'bg-[#C89B53] text-white' : step === 2 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
-                {step > 2 ? <span className="material-symbols-outlined text-[18px]">check</span> : <span className="font-label-md text-label-md">2</span>}
+            <div className="flex flex-col items-center gap-1 md:gap-2 bg-surface px-1 md:px-2 w-1/4">
+              <div className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 2 ? 'bg-[#C89B53] text-white' : step === 2 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
+                {step > 2 ? <span className="material-symbols-outlined text-[14px] md:text-[18px]">check</span> : <span className="font-label-sm md:font-label-md text-[12px] md:text-sm">2</span>}
               </div>
-              <span className={`font-label-md text-label-md ${step >= 2 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Data Orang Tua</span>
+              <span className={`text-[10px] md:text-sm text-center leading-tight ${step >= 2 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Data Orang Tua</span>
             </div>
             {/* Step 3 */}
-            <div className="flex flex-col items-center gap-2 bg-surface px-2">
-              <div className={`w-8 h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 3 ? 'bg-[#C89B53] text-white' : step === 3 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
-                {step > 3 ? <span className="material-symbols-outlined text-[18px]">check</span> : <span className="font-label-md text-label-md">3</span>}
+            <div className="flex flex-col items-center gap-1 md:gap-2 bg-surface px-1 md:px-2 w-1/4">
+              <div className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 3 ? 'bg-[#C89B53] text-white' : step === 3 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
+                {step > 3 ? <span className="material-symbols-outlined text-[14px] md:text-[18px]">check</span> : <span className="font-label-sm md:font-label-md text-[12px] md:text-sm">3</span>}
               </div>
-              <span className={`font-label-md text-label-md ${step >= 3 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Unggah Dokumen</span>
+              <span className={`text-[10px] md:text-sm text-center leading-tight ${step >= 3 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Unggah Dokumen</span>
             </div>
             {/* Step 4 */}
-            <div className="flex flex-col items-center gap-2 bg-surface px-2">
-              <div className={`w-8 h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 4 ? 'bg-[#C89B53] text-white' : step === 4 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
-                {step > 4 ? <span className="material-symbols-outlined text-[18px]">check</span> : <span className="font-label-md text-label-md">4</span>}
+            <div className="flex flex-col items-center gap-1 md:gap-2 bg-surface px-1 md:px-2 w-1/4">
+              <div className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center relative shadow-sm rounded-full transition-colors duration-300 ${step > 4 ? 'bg-[#C89B53] text-white' : step === 4 ? 'bg-white text-[#C89B53] border-2 border-[#C89B53]' : 'bg-surface-container-high text-on-surface-variant border-2 border-surface'}`}>
+                {step > 4 ? <span className="material-symbols-outlined text-[14px] md:text-[18px]">check</span> : <span className="font-label-sm md:font-label-md text-[12px] md:text-sm">4</span>}
               </div>
-              <span className={`font-label-md text-label-md ${step >= 4 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Review</span>
+              <span className={`text-[10px] md:text-sm text-center leading-tight ${step >= 4 ? 'text-[#172E40] font-bold' : 'text-on-surface-variant'}`}>Review</span>
             </div>
           </div>
 
