@@ -60,6 +60,25 @@ export default function Pendaftaran() {
     if (step > 1) setStep(step - 1);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) { // 2MB limit
+        alert("Ukuran file terlalu besar! Maksimal ukuran file adalah 2MB.");
+        e.target.value = ""; // Reset input
+        return;
+      }
+
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      
+      if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+        alert("Format file tidak didukung! Harap unggah file berformat Gambar (JPG/PNG), PDF, atau DOC/DOCX.");
+        e.target.value = ""; // Reset input
+      }
+    }
+  };
+
   return (
     <>
       <main className="pt-8 md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto min-h-screen">
@@ -762,10 +781,10 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Akte Kelahiran Anak <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, JPG, PNG up to 5MB</p>
+                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
                     </label>
                   </div>
 
@@ -773,10 +792,10 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">KTP Orang Tua <span className="font-normal text-on-surface-variant">(Ayah/Ibu Perwakilan saja - Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, JPG, PNG up to 5MB</p>
+                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
                     </label>
                   </div>
 
@@ -784,10 +803,10 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Kartu Keluarga (KK) <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, JPG, PNG up to 5MB</p>
+                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
                     </label>
                   </div>
 
@@ -795,10 +814,10 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Pas Foto Anak <span className="font-normal text-on-surface-variant">(Latar Merah, Ukuran 3x4)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".jpg,.jpeg,.png" className="hidden" />
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">JPG, PNG up to 5MB</p>
+                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
                     </label>
                   </div>
                 </>
