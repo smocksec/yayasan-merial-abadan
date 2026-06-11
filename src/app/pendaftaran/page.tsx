@@ -261,7 +261,7 @@ export default function Pendaftaran() {
                         type="text"
                         id="tahun_ajaran"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
-                        placeholder="Contoh: 2024/2025" />
+                        placeholder="Contoh: 2026/2027" />
                     </div>
                   </div>
 

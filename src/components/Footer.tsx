@@ -15,7 +15,7 @@ export default function Footer() {
           Yayasan Merial Abadan Madani
         </span>
         <p className="font-body-md text-body-md text-on-primary/80 text-center md:text-left">
-          © 2024 Yayasan Merial Abadan Madani. Menebar Kebaikan, Merawat Peradaban.
+          © 2026 Yayasan Merial Abadan Madani. Menebar Kebaikan, Merawat Peradaban.
         </p>
       </div>
       <div className="flex flex-col items-center md:items-end gap-6 mt-6 md:mt-0">

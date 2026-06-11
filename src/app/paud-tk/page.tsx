@@ -414,7 +414,7 @@ export default function PaudTkLanding() {
             <div className="relative z-10">
               <h2 className="font-headline-lg text-headline-lg text-white mb-4">Mari Bergabung Bersama Kami!</h2>
               <p className="font-body-lg text-white/80 mb-8 max-w-xl mx-auto">
-                Pendaftaran siswa baru tahun ajaran 2024/2025 telah dibuka. Segera amankan kursi untuk si kecil!
+                Pendaftaran siswa baru tahun ajaran 2026/2027 telah dibuka. Segera amankan kursi untuk si kecil!
               </p>
               <Link href="/pendaftaran">
                 <button className="px-10 py-4 bg-[#C89B53] text-white font-label-lg font-bold rounded-full hover:bg-[#b08544] transition-all shadow-[0_4px_15px_rgba(200,155,83,0.4)] hover:shadow-[0_6px_20px_rgba(200,155,83,0.6)] hover:-translate-y-1">

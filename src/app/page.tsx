@@ -15,7 +15,7 @@ export default function Home() {
           </div>
           <div className="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto flex flex-col items-center gap-8">
             <span className="text-warm-gold font-label-md text-label-md uppercase tracking-widest bg-surface-container/20 px-4 py-1 rounded-full backdrop-blur-sm">
-              Penerimaan Siswa Baru 2024
+              Penerimaan Siswa Baru 2026/2027
             </span>
             <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-primary drop-shadow-lg">
               Menebar Kebaikan,<br />Merawat Peradaban
