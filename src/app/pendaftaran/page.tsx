@@ -181,7 +181,7 @@ export default function Pendaftaran() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Umur */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="umur">Umur (Tahun)</label>
+                      <label className="block font-label-md text-label-md text-primary" htmlFor="umur">Umur (Tahun) <span className="text-red-500">*</span></label>
                       <input
                         type="number"
                         name="umur" id="umur" required
@@ -193,7 +193,7 @@ export default function Pendaftaran() {
 
                     {/* Jenis Kelamin */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="jenis_kelamin">Jenis Kelamin</label>
+                       <span className="text-red-500">*</span>
                       <div className="relative">
                         <select
                           name="jenis_kelamin" id="jenis_kelamin" required
@@ -213,7 +213,7 @@ export default function Pendaftaran() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Tempat Lahir */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir">Tempat Lahir</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="text"
                         name="tempat_lahir" id="tempat_lahir" required
@@ -223,7 +223,7 @@ export default function Pendaftaran() {
 
                     {/* Tanggal Lahir */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir">Tanggal Lahir</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="date"
                         name="tanggal_lahir" id="tanggal_lahir" required
@@ -234,7 +234,7 @@ export default function Pendaftaran() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Agama */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="agama">Agama</label>
+                       <span className="text-red-500">*</span>
                       <div className="relative">
                         <select
                           name="agama" id="agama" required
@@ -256,7 +256,7 @@ export default function Pendaftaran() {
 
                     {/* Tahun Ajaran */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="tahun_ajaran">Tahun Ajaran</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="text"
                         name="tahun_ajaran" id="tahun_ajaran" required
@@ -268,7 +268,7 @@ export default function Pendaftaran() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Anak Ke */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="anak_ke">Anak Ke</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="number"
                         name="anak_ke" id="anak_ke" required
@@ -279,7 +279,7 @@ export default function Pendaftaran() {
 
                     {/* Dari Jumlah Saudara */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="jumlah_saudara">Dari Jumlah Saudara</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="number"
                         name="jumlah_saudara" id="jumlah_saudara" required
@@ -292,7 +292,7 @@ export default function Pendaftaran() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* Berat Badan */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="berat_badan">Berat Badan (kg)</label>
+                      <label className="block font-label-md text-label-md text-primary" htmlFor="berat_badan">Berat Badan (kg) <span className="text-red-500">*</span></label>
                       <input
                         type="number"
                         name="berat_badan" id="berat_badan" required
@@ -303,7 +303,7 @@ export default function Pendaftaran() {
 
                     {/* Tinggi Badan */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="tinggi_badan">Tinggi Badan (cm)</label>
+                      <label className="block font-label-md text-label-md text-primary" htmlFor="tinggi_badan">Tinggi Badan (cm) <span className="text-red-500">*</span></label>
                       <input
                         type="number"
                         name="tinggi_badan" id="tinggi_badan" required
@@ -314,7 +314,7 @@ export default function Pendaftaran() {
 
                     {/* Jarak dari rumah ke sekolah */}
                     <div className="space-y-2">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="jarak_rumah">Jarak ke Sekolah (km)</label>
+                      <label className="block font-label-md text-label-md text-primary" htmlFor="jarak_rumah">Jarak ke Sekolah (km) <span className="text-red-500">*</span></label>
                       <input
                         type="number"
                         name="jarak_rumah" id="jarak_rumah" required
@@ -380,7 +380,7 @@ export default function Pendaftaran() {
 
                   {/* Alamat Lengkap */}
                   <div className="space-y-2">
-                    <label className="block font-label-md text-label-md text-primary" htmlFor="alamat_anak">Alamat Lengkap</label>
+                     <span className="text-red-500">*</span>
                     <textarea
                       name="alamat_anak" id="alamat_anak" required
                       className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
@@ -464,7 +464,7 @@ export default function Pendaftaran() {
                     
                     {/* Nama & Status */}
                     <div className="space-y-3">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="nama_ayah">Nama Ayah / Wali</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="text"
                         name="nama_ayah" id="nama_ayah" required
@@ -489,7 +489,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Tempat Lahir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir_ayah">Tempat Lahir</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="text"
                           name="tempat_lahir_ayah" id="tempat_lahir_ayah" required
@@ -498,7 +498,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* Tanggal Lahir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir_ayah">Tanggal Lahir</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="date"
                           name="tanggal_lahir_ayah" id="tanggal_lahir_ayah" required
@@ -509,7 +509,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Agama */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="agama_ayah">Agama</label>
+                         <span className="text-red-500">*</span>
                         <div className="relative">
                           <select
                             name="agama_ayah" id="agama_ayah" required
@@ -530,7 +530,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* Pendidikan Terakhir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="pendidikan_ayah">Pendidikan Terakhir</label>
+                         <span className="text-red-500">*</span>
                         <div className="relative">
                           <select
                             name="pendidikan_ayah" id="pendidikan_ayah" required
@@ -555,7 +555,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Pekerjaan */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="pekerjaan_ayah">Pekerjaan</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="text"
                           name="pekerjaan_ayah" id="pekerjaan_ayah" required
@@ -564,7 +564,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* No HP */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="nohp_ayah">No. HP / WhatsApp</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="tel"
                           name="nohp_ayah" id="nohp_ayah" required
@@ -576,7 +576,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Email */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="email_ayah">Email</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="email"
                           name="email_ayah" id="email_ayah" required
@@ -595,7 +595,7 @@ export default function Pendaftaran() {
                     
                     {/* Nama & Status */}
                     <div className="space-y-3">
-                      <label className="block font-label-md text-label-md text-primary" htmlFor="nama_ibu">Nama Ibu / Wali</label>
+                       <span className="text-red-500">*</span>
                       <input
                         type="text"
                         name="nama_ibu" id="nama_ibu" required
@@ -620,7 +620,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Tempat Lahir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir_ibu">Tempat Lahir</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="text"
                           name="tempat_lahir_ibu" id="tempat_lahir_ibu" required
@@ -629,7 +629,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* Tanggal Lahir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir_ibu">Tanggal Lahir</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="date"
                           name="tanggal_lahir_ibu" id="tanggal_lahir_ibu" required
@@ -640,7 +640,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Agama */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="agama_ibu">Agama</label>
+                         <span className="text-red-500">*</span>
                         <div className="relative">
                           <select
                             name="agama_ibu" id="agama_ibu" required
@@ -661,7 +661,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* Pendidikan Terakhir */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="pendidikan_ibu">Pendidikan Terakhir</label>
+                         <span className="text-red-500">*</span>
                         <div className="relative">
                           <select
                             name="pendidikan_ibu" id="pendidikan_ibu" required
@@ -686,7 +686,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Pekerjaan */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="pekerjaan_ibu">Pekerjaan</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="text"
                           name="pekerjaan_ibu" id="pekerjaan_ibu" required
@@ -695,7 +695,7 @@ export default function Pendaftaran() {
                       </div>
                       {/* No HP */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="nohp_ibu">No. HP / WhatsApp</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="tel"
                           name="nohp_ibu" id="nohp_ibu" required
@@ -707,7 +707,7 @@ export default function Pendaftaran() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Email */}
                       <div className="space-y-2">
-                        <label className="block font-label-md text-label-md text-primary" htmlFor="email_ibu">Email</label>
+                         <span className="text-red-500">*</span>
                         <input
                           type="email"
                           name="email_ibu" id="email_ibu" required
@@ -720,7 +720,7 @@ export default function Pendaftaran() {
 
                   {/* Pendapatan Orang Tua */}
                   <div className="space-y-3 pt-6 border-t border-surface-container">
-                    <label className="block font-label-md text-label-md text-primary">Pendapatan Orang Tua per Bulan</label>
+                     <span className="text-red-500">*</span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       <label className="flex items-center gap-3 cursor-pointer group p-3 border border-outline-variant rounded-xl hover:border-secondary transition-colors bg-surface-container-lowest">
                         <input type="radio" name="pendapatan" value="0-5jt" required className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary" />
@@ -747,7 +747,7 @@ export default function Pendaftaran() {
 
                   {/* Alamat Tinggal */}
                   <div className="space-y-2 pt-6 border-t border-surface-container">
-                    <label className="block font-label-md text-label-md text-primary" htmlFor="alamat">Alamat Tinggal Orang Tua/Wali</label>
+                     <span className="text-red-500">*</span>
                     <textarea
                       name="alamat" id="alamat" required
                       className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
@@ -779,7 +779,7 @@ export default function Pendaftaran() {
                 <>
                   {/* Akte Kelahiran Upload */}
                   <div className="space-y-3">
-                    <label className="block font-label-md text-label-md text-primary">Akte Kelahiran Anak <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
+                     <span className="text-red-500">*</span>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="file_upload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
@@ -790,7 +790,7 @@ export default function Pendaftaran() {
 
                   {/* KTP Orang Tua Upload */}
                   <div className="space-y-3">
-                    <label className="block font-label-md text-label-md text-primary">KTP Orang Tua <span className="font-normal text-on-surface-variant">(Ayah/Ibu Perwakilan saja - Wajib Upload Scan Asli)</span></label>
+                     <span className="text-red-500">*</span>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="ktp_ortu" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
@@ -801,7 +801,7 @@ export default function Pendaftaran() {
 
                   {/* KK Upload */}
                   <div className="space-y-3">
-                    <label className="block font-label-md text-label-md text-primary">Kartu Keluarga (KK) <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
+                    <label className="block font-label-md text-label-md text-primary">Kartu Keluarga (KK) <span className="text-red-500">*</span> <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="kk" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
@@ -812,7 +812,7 @@ export default function Pendaftaran() {
 
                   {/* Pas Foto Upload */}
                   <div className="space-y-3">
-                    <label className="block font-label-md text-label-md text-primary">Pas Foto Anak <span className="font-normal text-on-surface-variant">(Latar Merah, Ukuran 3x4)</span></label>
+                     <span className="text-red-500">*</span>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="pas_foto" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
