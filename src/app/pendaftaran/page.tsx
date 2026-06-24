@@ -184,7 +184,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="umur">Umur (Tahun)</label>
                       <input
                         type="number"
-                        id="umur"
+                        name="umur" id="umur" required
                         min="1"
                         max="20"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
@@ -196,7 +196,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="jenis_kelamin">Jenis Kelamin</label>
                       <div className="relative">
                         <select
-                          id="jenis_kelamin"
+                          name="jenis_kelamin" id="jenis_kelamin" required
                           defaultValue=""
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                           <option value="" disabled>Pilih Jenis Kelamin</option>
@@ -216,7 +216,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir">Tempat Lahir</label>
                       <input
                         type="text"
-                        id="tempat_lahir"
+                        name="tempat_lahir" id="tempat_lahir" required
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: Jakarta" />
                     </div>
@@ -226,7 +226,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir">Tanggal Lahir</label>
                       <input
                         type="date"
-                        id="tanggal_lahir"
+                        name="tanggal_lahir" id="tanggal_lahir" required
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl" />
                     </div>
                   </div>
@@ -237,7 +237,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="agama">Agama</label>
                       <div className="relative">
                         <select
-                          id="agama"
+                          name="agama" id="agama" required
                           defaultValue=""
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                           <option value="" disabled>Pilih Agama</option>
@@ -259,7 +259,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="tahun_ajaran">Tahun Ajaran</label>
                       <input
                         type="text"
-                        id="tahun_ajaran"
+                        name="tahun_ajaran" id="tahun_ajaran" required
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: 2026/2027" />
                     </div>
@@ -271,7 +271,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="anak_ke">Anak Ke</label>
                       <input
                         type="number"
-                        id="anak_ke"
+                        name="anak_ke" id="anak_ke" required
                         min="1"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: 1" />
@@ -282,7 +282,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="jumlah_saudara">Dari Jumlah Saudara</label>
                       <input
                         type="number"
-                        id="jumlah_saudara"
+                        name="jumlah_saudara" id="jumlah_saudara" required
                         min="1"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: 3" />
@@ -295,7 +295,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="berat_badan">Berat Badan (kg)</label>
                       <input
                         type="number"
-                        id="berat_badan"
+                        name="berat_badan" id="berat_badan" required
                         min="1"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: 20" />
@@ -306,7 +306,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="tinggi_badan">Tinggi Badan (cm)</label>
                       <input
                         type="number"
-                        id="tinggi_badan"
+                        name="tinggi_badan" id="tinggi_badan" required
                         min="1"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: 110" />
@@ -317,7 +317,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="jarak_rumah">Jarak ke Sekolah (km)</label>
                       <input
                         type="number"
-                        id="jarak_rumah"
+                        name="jarak_rumah" id="jarak_rumah" required
                         min="0"
                         step="0.1"
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
@@ -382,7 +382,7 @@ export default function Pendaftaran() {
                   <div className="space-y-2">
                     <label className="block font-label-md text-label-md text-primary" htmlFor="alamat_anak">Alamat Lengkap</label>
                     <textarea
-                      id="alamat_anak"
+                      name="alamat_anak" id="alamat_anak" required
                       className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                       placeholder="Contoh: Jl. Merdeka No. 123, RT 01/RW 02"
                       rows={3}></textarea>
@@ -395,7 +395,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary">Ambil service antar jemput?</label>
                       <div className="flex flex-wrap gap-4 pt-1">
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="antar_jemput" value="Ya" className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <input type="radio" name="antar_jemput" value="Ya" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
                           <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Ya</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
@@ -410,7 +410,7 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary">Ambil program catering?</label>
                       <div className="grid grid-cols-2 gap-3 pt-1">
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="catering" value="Bulanan" className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <input type="radio" name="catering" value="Bulanan" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
                           <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Bulanan</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
@@ -467,12 +467,12 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="nama_ayah">Nama Ayah / Wali</label>
                       <input
                         type="text"
-                        id="nama_ayah"
+                        name="nama_ayah" id="nama_ayah" required
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: Agus Santoso" />
                       <div className="flex flex-wrap gap-4 pt-1">
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="status_ayah" value="Kandung" className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <input type="radio" name="status_ayah" value="Kandung" required className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
                           <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Kandung</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
@@ -492,7 +492,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir_ayah">Tempat Lahir</label>
                         <input
                           type="text"
-                          id="tempat_lahir_ayah"
+                          name="tempat_lahir_ayah" id="tempat_lahir_ayah" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: Jakarta" />
                       </div>
@@ -501,7 +501,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir_ayah">Tanggal Lahir</label>
                         <input
                           type="date"
-                          id="tanggal_lahir_ayah"
+                          name="tanggal_lahir_ayah" id="tanggal_lahir_ayah" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl" />
                       </div>
                     </div>
@@ -512,7 +512,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="agama_ayah">Agama</label>
                         <div className="relative">
                           <select
-                            id="agama_ayah"
+                            name="agama_ayah" id="agama_ayah" required
                             defaultValue=""
                             className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                             <option value="" disabled>Pilih Agama</option>
@@ -533,7 +533,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="pendidikan_ayah">Pendidikan Terakhir</label>
                         <div className="relative">
                           <select
-                            id="pendidikan_ayah"
+                            name="pendidikan_ayah" id="pendidikan_ayah" required
                             defaultValue=""
                             className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                             <option value="" disabled>Pilih Pendidikan</option>
@@ -558,7 +558,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="pekerjaan_ayah">Pekerjaan</label>
                         <input
                           type="text"
-                          id="pekerjaan_ayah"
+                          name="pekerjaan_ayah" id="pekerjaan_ayah" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: Wiraswasta" />
                       </div>
@@ -567,7 +567,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="nohp_ayah">No. HP / WhatsApp</label>
                         <input
                           type="tel"
-                          id="nohp_ayah"
+                          name="nohp_ayah" id="nohp_ayah" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: 081234567890" />
                       </div>
@@ -579,7 +579,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="email_ayah">Email</label>
                         <input
                           type="email"
-                          id="email_ayah"
+                          name="email_ayah" id="email_ayah" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: agus.santoso@gmail.com"
                         />
@@ -598,12 +598,12 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary" htmlFor="nama_ibu">Nama Ibu / Wali</label>
                       <input
                         type="text"
-                        id="nama_ibu"
+                        name="nama_ibu" id="nama_ibu" required
                         className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                         placeholder="Contoh: Siti Aminah" />
                       <div className="flex flex-wrap gap-4 pt-1">
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="status_ibu" value="Kandung" className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <input type="radio" name="status_ibu" value="Kandung" required className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
                           <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Kandung</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
@@ -623,7 +623,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="tempat_lahir_ibu">Tempat Lahir</label>
                         <input
                           type="text"
-                          id="tempat_lahir_ibu"
+                          name="tempat_lahir_ibu" id="tempat_lahir_ibu" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: Jakarta" />
                       </div>
@@ -632,7 +632,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="tanggal_lahir_ibu">Tanggal Lahir</label>
                         <input
                           type="date"
-                          id="tanggal_lahir_ibu"
+                          name="tanggal_lahir_ibu" id="tanggal_lahir_ibu" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl" />
                       </div>
                     </div>
@@ -643,7 +643,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="agama_ibu">Agama</label>
                         <div className="relative">
                           <select
-                            id="agama_ibu"
+                            name="agama_ibu" id="agama_ibu" required
                             defaultValue=""
                             className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                             <option value="" disabled>Pilih Agama</option>
@@ -664,7 +664,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="pendidikan_ibu">Pendidikan Terakhir</label>
                         <div className="relative">
                           <select
-                            id="pendidikan_ibu"
+                            name="pendidikan_ibu" id="pendidikan_ibu" required
                             defaultValue=""
                             className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl appearance-none">
                             <option value="" disabled>Pilih Pendidikan</option>
@@ -689,7 +689,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="pekerjaan_ibu">Pekerjaan</label>
                         <input
                           type="text"
-                          id="pekerjaan_ibu"
+                          name="pekerjaan_ibu" id="pekerjaan_ibu" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: Ibu Rumah Tangga" />
                       </div>
@@ -698,7 +698,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="nohp_ibu">No. HP / WhatsApp</label>
                         <input
                           type="tel"
-                          id="nohp_ibu"
+                          name="nohp_ibu" id="nohp_ibu" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: 081234567890" />
                       </div>
@@ -710,7 +710,7 @@ export default function Pendaftaran() {
                         <label className="block font-label-md text-label-md text-primary" htmlFor="email_ibu">Email</label>
                         <input
                           type="email"
-                          id="email_ibu"
+                          name="email_ibu" id="email_ibu" required
                           className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                           placeholder="Contoh: siti.aminah@gmail.com"
                         />
@@ -723,7 +723,7 @@ export default function Pendaftaran() {
                     <label className="block font-label-md text-label-md text-primary">Pendapatan Orang Tua per Bulan</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       <label className="flex items-center gap-3 cursor-pointer group p-3 border border-outline-variant rounded-xl hover:border-secondary transition-colors bg-surface-container-lowest">
-                        <input type="radio" name="pendapatan" value="0-5jt" className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary" />
+                        <input type="radio" name="pendapatan" value="0-5jt" required className="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary" />
                         <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">0 - 5 Juta</span>
                       </label>
                       <label className="flex items-center gap-3 cursor-pointer group p-3 border border-outline-variant rounded-xl hover:border-secondary transition-colors bg-surface-container-lowest">
@@ -749,7 +749,7 @@ export default function Pendaftaran() {
                   <div className="space-y-2 pt-6 border-t border-surface-container">
                     <label className="block font-label-md text-label-md text-primary" htmlFor="alamat">Alamat Tinggal Orang Tua/Wali</label>
                     <textarea
-                      id="alamat"
+                      name="alamat" id="alamat" required
                       className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
                       placeholder="Contoh: Jl. Merdeka No. 123, RT 01/RW 02"
                       rows={3}></textarea>
@@ -781,7 +781,7 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Akte Kelahiran Anak <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
+                      <input type="file" name="file_upload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
                       <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
@@ -792,7 +792,7 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">KTP Orang Tua <span className="font-normal text-on-surface-variant">(Ayah/Ibu Perwakilan saja - Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
+                      <input type="file" name="ktp_ortu" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
                       <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
@@ -803,7 +803,7 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Kartu Keluarga (KK) <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
+                      <input type="file" name="kk" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
                       <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
@@ -814,7 +814,7 @@ export default function Pendaftaran() {
                   <div className="space-y-3">
                     <label className="block font-label-md text-label-md text-primary">Pas Foto Anak <span className="font-normal text-on-surface-variant">(Latar Merah, Ukuran 3x4)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileChange} />
+                      <input type="file" name="pas_foto" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
                       <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
                       <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
                       <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>

@@ -4,6 +4,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminDashboard() {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
@@ -19,7 +22,11 @@ export default async function AdminDashboard() {
   if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
     supabaseAdmin = createSupabaseClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
+      {
+        auth: { persistSession: false },
+        global: { fetch: (url, options) => fetch(url, { ...options, cache: 'no-store' }) }
+      }
     );
   }
 
@@ -55,8 +62,18 @@ export default async function AdminDashboard() {
   const totalTK = displayData.filter((r) => r.program === 'TK').length;
   const totalMenunggu = displayData.filter((r) => r.status === 'Menunggu').length;
 
+  const debugInfo = JSON.stringify({
+    isAdminInitialized: !!supabaseAdmin,
+    dataLength: displayData.length,
+    error: error ? error.message : null,
+    serviceKeyLength: process.env.SUPABASE_SERVICE_ROLE_KEY?.length || 0,
+  });
+
   return (
     <main className="pt-8 md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1400px] mx-auto min-h-screen">
+      <div className="bg-red-100 p-4 rounded mb-4">
+        <p className="text-red-800 font-mono text-sm">Debug Info: {debugInfo}</p>
+      </div>
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 mt-16 md:mt-0">
         <div>
