@@ -14,8 +14,18 @@ export default async function AdminDashboard() {
     redirect('/dashboard');
   }
 
+  // Initialize supabaseAdmin early to bypass RLS for admin data fetching
+  let supabaseAdmin = null;
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    supabaseAdmin = createSupabaseClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+  }
+
   // Mengambil data asli dari Supabase
-  const { data: registrations, error } = await supabase
+  const clientToUse = supabaseAdmin || supabase;
+  const { data: registrations, error } = await clientToUse
     .from('registrations')
     .select('*')
     .order('created_at', { ascending: false });
@@ -25,11 +35,7 @@ export default async function AdminDashboard() {
 
   // Mengambil total user dari auth.users (Membutuhkan SUPABASE_SERVICE_ROLE_KEY di .env.local)
   let totalBelumIsiForm = 0;
-  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    const supabaseAdmin = createSupabaseClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
+  if (supabaseAdmin) {
     const { data: usersData, error: usersError } = await supabaseAdmin.auth.admin.listUsers();
     
     if (!usersError && usersData?.users) {
