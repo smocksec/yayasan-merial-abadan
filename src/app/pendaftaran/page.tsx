@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +10,9 @@ export default function Pendaftaran() {
   const [allFormData, setAllFormData] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: string }>({});
+  const [initialData, setInitialData] = useState<any>(null);
+  const [registrationId, setRegistrationId] = useState<string | null>(null);
+  const [isLoadingData, setIsLoadingData] = useState(true);
   const router = useRouter();
 
   const supabase = createBrowserClient(
@@ -17,12 +20,96 @@ export default function Pendaftaran() {
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
   );
 
+  useEffect(() => {
+    const fetchExistingData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from('registrations')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+          
+        if (data) {
+          setInitialData(data.data_lengkap || {});
+          setAllFormData(data.data_lengkap || {});
+          setRegistrationId(data.id);
+          if (data.data_lengkap) {
+            setUploadedFiles({
+              file_upload: data.data_lengkap.file_upload?.name || '',
+              ktp_ortu: data.data_lengkap.ktp_ortu?.name || '',
+              kk: data.data_lengkap.kk?.name || '',
+              pas_foto: data.data_lengkap.pas_foto?.name || '',
+            });
+          }
+        }
+      }
+      setIsLoadingData(false);
+    };
+    fetchExistingData();
+  }, []);
+
+  useEffect(() => {
+    if (initialData && Object.keys(initialData).length > 0) {
+      const form = document.getElementById('pendaftaran-form') as HTMLFormElement;
+      if (form) {
+        Object.entries(initialData).forEach(([key, value]) => {
+          const inputs = form.elements.namedItem(key);
+          if (inputs) {
+            if (inputs instanceof RadioNodeList) {
+              inputs.forEach((radio: any) => {
+                if (radio.value === value) radio.checked = true;
+                if (radio.type === 'checkbox' && Array.isArray(value) && value.includes(radio.value)) {
+                  radio.checked = true;
+                }
+              });
+            } else {
+              const input = inputs as HTMLInputElement;
+              if (input.type === 'checkbox') {
+                 if (Array.isArray(value)) {
+                   input.checked = value.includes(input.value);
+                 } else {
+                   input.checked = input.value === value;
+                 }
+              } else if (input.type !== 'file') {
+                input.value = value as string;
+              }
+            }
+          }
+        });
+      }
+    }
+  }, [step, initialData]);
+
   const handleNext = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Simpan data dari step saat ini
     const currentFormData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(currentFormData.entries());
+    const data: any = {};
+    
+    currentFormData.forEach((value, key) => {
+      if (value instanceof File && value.size === 0) return;
+      if (!data[key]) {
+        data[key] = value;
+      } else {
+        if (!Array.isArray(data[key])) {
+          data[key] = [data[key]];
+        }
+        data[key].push(value);
+      }
+    });
+
+    ['file_upload', 'ktp_ortu', 'kk', 'pas_foto'].forEach(fileField => {
+       if (!data[fileField] && uploadedFiles[fileField]) {
+         data[fileField] = { name: uploadedFiles[fileField] };
+       } else if (data[fileField] instanceof File) {
+         data[fileField] = { name: data[fileField].name };
+       }
+    });
+
     const mergedData = { ...allFormData, ...data };
     setAllFormData(mergedData);
 
@@ -35,14 +122,23 @@ export default function Pendaftaran() {
       try {
         const { data: { user } } = await supabase.auth.getUser();
         
-        const { error } = await supabase.from('registrations').insert({
+        const payload = {
           user_id: user?.id,
           nama_anak: mergedData.nama_anak || 'Tanpa Nama',
-          program: mergedData.program || 'PAUD',
+          program: mergedData.program || 'TPA',
           no_hp_ortu: mergedData.nohp_ayah || mergedData.nohp_ibu || '-',
           data_lengkap: mergedData,
           status: 'Menunggu'
-        });
+        };
+
+        let error;
+        if (registrationId) {
+          const res = await supabase.from('registrations').update(payload).eq('id', registrationId);
+          error = res.error;
+        } else {
+          const res = await supabase.from('registrations').insert(payload);
+          error = res.error;
+        }
 
         if (error) throw error;
         
@@ -104,6 +200,17 @@ export default function Pendaftaran() {
     }
   };
 
+  if (isLoadingData) {
+    return (
+      <main className="pt-8 md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <span className="material-symbols-outlined text-[48px] text-primary animate-spin">progress_activity</span>
+          <p className="font-body-md text-body-md text-on-surface-variant">Memuat data pendaftaran Anda...</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <>
       <main className="pt-8 md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto min-h-screen">
@@ -158,7 +265,7 @@ export default function Pendaftaran() {
               {step === 1 ? "Silakan lengkapi informasi biodata calon siswa di bawah ini dengan benar." : step === 2 ? "Silakan lengkapi informasi data orang tua / wali di bawah ini." : step === 3 ? "Silakan unggah dokumen pendukung pendaftaran yang diminta. Pastikan dokumen yang diunggah adalah hasil scan asli." : "Periksa kembali data Anda sebelum disubmit."}
             </p>
 
-            <form onSubmit={handleNext} className="space-y-6">
+            <form id="pendaftaran-form" onSubmit={handleNext} className="space-y-6">
               {step === 1 && (
                 <>
                   {/* Program Pilihan & Waktu Belajar */}
@@ -167,12 +274,24 @@ export default function Pendaftaran() {
                       <label className="block font-label-md text-label-md text-primary font-bold">Tingkat Pendidikan <span className="text-red-500">*</span></label>
                       <div className="flex flex-wrap gap-4 pt-1">
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="program" value="PAUD" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
-                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">PAUD</span>
+                          <input type="radio" name="program" value="TPA" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TPA <span className="text-on-surface-variant font-normal">(3 - 24 bulan)</span></span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
-                          <input type="radio" name="program" value="TK" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
-                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK</span>
+                          <input type="radio" name="program" value="KB" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">KB <span className="text-on-surface-variant font-normal">(2 - 4 Tahun)</span></span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer group">
+                          <input type="radio" name="program" value="TK A" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK A <span className="text-on-surface-variant font-normal">(4 - 5 Tahun)</span></span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer group">
+                          <input type="radio" name="program" value="TK B" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">TK B <span className="text-on-surface-variant font-normal">(5 - 6 Tahun)</span></span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer group w-full mt-2">
+                          <input type="radio" name="program" value="Bimbel" required className="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary bg-surface-container-lowest" />
+                          <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Bimbel <span className="text-on-surface-variant font-normal">(Bimbingan Belajar)</span></span>
                         </label>
                       </div>
                     </div>

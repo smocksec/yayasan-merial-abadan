@@ -133,8 +133,8 @@ export default function Dashboard() {
           </div>
           <Link href="/pendaftaran">
             <button className="bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-6 py-3 hover:bg-tertiary-fixed-dim transition-colors shadow-sm flex items-center gap-2 rounded-full border border-transparent">
-              <span className="material-symbols-outlined">add</span>
-              Daftarkan Anak
+              <span className="material-symbols-outlined">{registrations.length > 0 ? "edit" : "add"}</span>
+              {registrations.length > 0 ? "Edit Data Anak" : "Daftarkan Anak"}
             </button>
           </Link>
         </div>
