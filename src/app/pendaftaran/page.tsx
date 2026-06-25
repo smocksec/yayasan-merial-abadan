@@ -9,6 +9,7 @@ export default function Pendaftaran() {
   const [step, setStep] = useState(1);
   const [allFormData, setAllFormData] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: string }>({});
   const router = useRouter();
 
   const supabase = createBrowserClient(
@@ -62,10 +63,17 @@ export default function Pendaftaran() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    const fieldName = e.target.name;
+
     if (file) {
       if (file.size > 2 * 1024 * 1024) { // 2MB limit
         alert("Ukuran file terlalu besar! Maksimal ukuran file adalah 2MB.");
         e.target.value = ""; // Reset input
+        setUploadedFiles(prev => {
+          const newFiles = { ...prev };
+          delete newFiles[fieldName];
+          return newFiles;
+        });
         return;
       }
 
@@ -75,7 +83,24 @@ export default function Pendaftaran() {
       if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
         alert("Format file tidak didukung! Harap unggah file berformat Gambar (JPG/PNG), PDF, atau DOC/DOCX.");
         e.target.value = ""; // Reset input
+        setUploadedFiles(prev => {
+          const newFiles = { ...prev };
+          delete newFiles[fieldName];
+          return newFiles;
+        });
+        return;
       }
+
+      setUploadedFiles(prev => ({
+        ...prev,
+        [fieldName]: file.name
+      }));
+    } else {
+      setUploadedFiles(prev => {
+        const newFiles = { ...prev };
+        delete newFiles[fieldName];
+        return newFiles;
+      });
     }
   };
 
@@ -782,9 +807,19 @@ export default function Pendaftaran() {
                     <label className="block font-label-md text-label-md text-primary">Upload Akte Kelahiran <span className="text-red-500">*</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="file_upload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
-                      <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
-                      <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                      {uploadedFiles['file_upload'] ? (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-secondary mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>task</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1 font-semibold">{uploadedFiles['file_upload']}</p>
+                          <p className="font-caption text-caption text-secondary text-center">File terpilih. Klik untuk mengganti.</p>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
+                          <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                        </>
+                      )}
                     </label>
                   </div>
 
@@ -793,9 +828,19 @@ export default function Pendaftaran() {
                     <label className="block font-label-md text-label-md text-primary">Upload KTP Orang Tua / Wali <span className="text-red-500">*</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="ktp_ortu" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
-                      <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
-                      <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                      {uploadedFiles['ktp_ortu'] ? (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-secondary mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>task</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1 font-semibold">{uploadedFiles['ktp_ortu']}</p>
+                          <p className="font-caption text-caption text-secondary text-center">File terpilih. Klik untuk mengganti.</p>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
+                          <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                        </>
+                      )}
                     </label>
                   </div>
 
@@ -804,9 +849,19 @@ export default function Pendaftaran() {
                     <label className="block font-label-md text-label-md text-primary">Kartu Keluarga (KK) <span className="text-red-500">*</span> <span className="font-normal text-on-surface-variant">(Wajib Upload Scan Asli)</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="kk" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
-                      <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
-                      <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                      {uploadedFiles['kk'] ? (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-secondary mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>task</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1 font-semibold">{uploadedFiles['kk']}</p>
+                          <p className="font-caption text-caption text-secondary text-center">File terpilih. Klik untuk mengganti.</p>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
+                          <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                        </>
+                      )}
                     </label>
                   </div>
 
@@ -815,9 +870,19 @@ export default function Pendaftaran() {
                     <label className="block font-label-md text-label-md text-primary">Upload Pas Foto <span className="text-red-500">*</span></label>
                     <label className="border-2 border-dashed border-outline-variant p-8 flex flex-col items-center justify-center bg-surface hover:border-secondary hover:bg-surface-container-low transition-colors cursor-pointer group rounded-3xl w-full">
                       <input type="file" name="pas_foto" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required className="hidden" onChange={handleFileChange} />
-                      <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
-                      <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
-                      <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                      {uploadedFiles['pas_foto'] ? (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-secondary mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>task</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1 font-semibold">{uploadedFiles['pas_foto']}</p>
+                          <p className="font-caption text-caption text-secondary text-center">File terpilih. Klik untuk mengganti.</p>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-[48px] text-outline mb-4 group-hover:text-secondary transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>upload_file</span>
+                          <p className="font-body-md text-body-md text-primary text-center mb-1"><span className="font-semibold text-secondary">Klik untuk unggah</span> atau seret dan lepas file ke sini</p>
+                          <p className="font-caption text-caption text-on-surface-variant text-center">PDF, DOC, DOCX, JPG, PNG up to 2MB</p>
+                        </>
+                      )}
                     </label>
                   </div>
                 </>
