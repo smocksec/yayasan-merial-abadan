@@ -21,80 +21,20 @@ export default function Pendaftaran() {
   );
 
   useEffect(() => {
-    const fetchExistingData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data } = await supabase
-          .from('registrations')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
-          
-        if (data) {
-          setInitialData(data.data_lengkap || {});
-          setAllFormData(data.data_lengkap || {});
-          setRegistrationId(data.id);
-          if (data.data_lengkap) {
-            setUploadedFiles({
-              file_upload: data.data_lengkap.file_upload?.name || '',
-              ktp_ortu: data.data_lengkap.ktp_ortu?.name || '',
-              kk: data.data_lengkap.kk?.name || '',
-              pas_foto: data.data_lengkap.pas_foto?.name || '',
-            });
-          }
-        }
-      }
-
-      // Load draft from localStorage if exists (overrides initialData if newer)
-      const savedDraft = localStorage.getItem("registration_draft");
-      if (savedDraft) {
-        try {
-          const parsedDraft = JSON.parse(savedDraft);
-          setInitialData((prev: any) => ({ ...(prev || {}), ...parsedDraft }));
-          setAllFormData((prev: any) => ({ ...(prev || {}), ...parsedDraft }));
-        } catch (e) {
-          console.error("Failed to parse draft", e);
-        }
-      }
-
-      setIsLoadingData(false);
-    };
-    fetchExistingData();
-  }, []);
-
-  useEffect(() => {
-    if (initialData && Object.keys(initialData).length > 0) {
-      const form = document.getElementById('pendaftaran-form') as HTMLFormElement;
-      if (form) {
-        Object.entries(initialData).forEach(([key, value]) => {
-          const inputs = form.elements.namedItem(key);
-          if (inputs) {
-            if (inputs instanceof RadioNodeList) {
-              inputs.forEach((radio: any) => {
-                if (radio.value === value) radio.checked = true;
-                if (radio.type === 'checkbox' && Array.isArray(value) && value.includes(radio.value)) {
-                  radio.checked = true;
-                }
-              });
-            } else {
-              const input = inputs as HTMLInputElement;
-              if (input.type === 'checkbox') {
-                 if (Array.isArray(value)) {
-                   input.checked = value.includes(input.value);
-                 } else {
-                   input.checked = input.value === value;
-                 }
-              } else if (input.type !== 'file') {
-                input.value = value as string;
-              }
-            }
-          }
-        });
+    // Load draft from localStorage if exists
+    const savedDraft = localStorage.getItem("admin_registration_draft");
+    if (savedDraft) {
+      try {
+        const parsedDraft = JSON.parse(savedDraft);
+        setInitialData((prev: any) => ({ ...(prev || {}), ...parsedDraft }));
+        setAllFormData((prev: any) => ({ ...(prev || {}), ...parsedDraft }));
+      } catch (e) {
+        console.error("Failed to parse draft", e);
       }
     }
-  }, [step, initialData]);
+
+    setIsLoadingData(false);
+  }, []);
 
   const handleNext = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -129,37 +69,32 @@ export default function Pendaftaran() {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      // Step 4: Submit ke Supabase
+      // Step 4: Submit ke API Admin
       setIsSubmitting(true);
       
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        
         const payload = {
-          user_id: user?.id,
+          email_ortu: mergedData.email_ortu,
           nama_anak: mergedData.nama_anak || 'Tanpa Nama',
           program: mergedData.program || 'TPA',
           no_hp_ortu: mergedData.nohp_ayah || mergedData.nohp_ibu || '-',
           data_lengkap: mergedData,
-          status: 'Menunggu'
         };
 
-        let error;
-        if (registrationId) {
-          const res = await supabase.from('registrations').update(payload).eq('id', registrationId);
-          error = res.error;
-        } else {
-          const res = await supabase.from('registrations').insert(payload);
-          error = res.error;
-        }
+        const res = await fetch('/api/admin/submit-registration', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-        if (error) throw error;
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error || 'Gagal submit form');
         
         // Clear draft on success
-        localStorage.removeItem("registration_draft");
+        localStorage.removeItem("admin_registration_draft");
 
-        // Sukses! Arahkan ke dashboard
-        router.push('/dashboard?message=Pendaftaran berhasil dikirim!');
+        // Sukses! Arahkan ke dashboard admin
+        router.push('/admin?message=Pendaftaran berhasil dikirim untuk orang tua!');
       } catch (err) {
         console.error("Error submitting form:", err);
         alert("Gagal mengirim pendaftaran. Pastikan Anda sudah login.");
@@ -190,7 +125,7 @@ export default function Pendaftaran() {
     });
 
     const mergedData = { ...allFormData, ...data };
-    localStorage.setItem("registration_draft", JSON.stringify(mergedData));
+    localStorage.setItem("admin_registration_draft", JSON.stringify(mergedData));
     if (showAlert) {
       alert("Draft berhasil disimpan! Anda bisa melanjutkan pengisian form ini kapan saja tanpa takut data hilang.");
     }
@@ -316,6 +251,23 @@ export default function Pendaftaran() {
             <form id="pendaftaran-form" onSubmit={handleNext} onBlur={handleFormBlur} className="space-y-6">
               {step === 1 && (
                 <>
+                  {/* Email Orang Tua (Khusus Admin) */}
+                  <div className="space-y-2 mb-6 border-b border-surface-container pb-6 bg-primary/5 p-6 rounded-xl border border-primary/20">
+                    <label className="block font-label-md text-label-md text-primary font-bold" htmlFor="email_ortu">
+                      Email Orang Tua <span className="text-red-500">*</span>
+                    </label>
+                    <p className="font-caption text-caption text-on-surface-variant mb-3">
+                      Masukkan email orang tua siswa. Jika akun belum ada, sistem akan otomatis membuatkan dengan password default <b>Merial123!</b>
+                    </p>
+                    <input
+                      type="email"
+                      id="email_ortu"
+                      name="email_ortu"
+                      required
+                      className="w-full border border-outline-variant bg-white px-4 py-3 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-shadow rounded-xl"
+                      placeholder="Contoh: orangtua@gmail.com" />
+                  </div>
+
                   {/* Program Pilihan & Waktu Belajar */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 border-b border-surface-container pb-6">
                     <div className="space-y-3">
