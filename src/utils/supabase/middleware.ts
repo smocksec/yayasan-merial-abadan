@@ -50,6 +50,13 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
+  // Proteksi Rute: Jika belum login dan mencoba masuk ke pendaftaran
+  if (!user && path.startsWith('/pendaftaran')) {
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('message', 'Silakan login atau buat akun terlebih dahulu untuk mengisi formulir pendaftaran anak.')
+    return NextResponse.redirect(loginUrl)
+  }
+
   // Jika sudah login dan mencoba masuk ke halaman login
   if (user && path === '/login') {
     if (user.email?.toLowerCase() === 'aufarifqi119@gmail.com') {
@@ -58,9 +65,9 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  // Jika sudah login dan mengklik tombol daftar/register, arahkan ke form pendaftaran
+  // Jika sudah login dan mencoba ke halaman register, arahkan ke dashboard
   if (user && path === '/register') {
-    return NextResponse.redirect(new URL('/pendaftaran', request.url))
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return supabaseResponse

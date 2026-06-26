@@ -3,20 +3,23 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createBrowserClient } from "@supabase/ssr";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [registrations, setRegistrations] = useState<any[]>([]);
   const [userName, setUserName] = useState("User");
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const router = useRouter();
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
 
   useEffect(() => {
     const fetchUserAndData = async () => {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-      );
-      
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUserName(user.user_metadata?.full_name || user.email?.split('@')[0] || "User");
@@ -36,6 +39,13 @@ export default function Dashboard() {
     
     fetchUserAndData();
   }, []);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    await supabase.auth.signOut();
+    router.push('/');
+    router.refresh();
+  };
 
   // Untuk sementara tagihan diset 0, menunggu fitur VA
   const totalTagihan = 0;
@@ -91,7 +101,7 @@ export default function Dashboard() {
             className="flex items-center gap-3 px-4 py-3 text-on-secondary/80 hover:text-on-secondary hover:bg-on-secondary/10 font-label-md text-label-md transition-colors rounded-xl"
           >
             <span className="material-symbols-outlined">app_registration</span>
-            Pendaftaran
+            Daftarkan Anak
           </Link>
           <Link
             href="#"
@@ -111,13 +121,14 @@ export default function Dashboard() {
           </Link>
         </nav>
         <div className="p-4 border-t border-on-secondary/20">
-          <Link
-            href="/"
-            className="flex items-center gap-3 px-4 py-2 text-on-secondary/80 hover:text-on-secondary transition-colors font-label-md text-label-md"
+          <button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className="flex items-center gap-3 px-4 py-2 text-on-secondary/80 hover:text-on-secondary transition-colors font-label-md text-label-md w-full disabled:opacity-50"
           >
             <span className="material-symbols-outlined">logout</span>
-            Keluar
-          </Link>
+            {isLoggingOut ? "Keluar..." : "Keluar"}
+          </button>
         </div>
       </aside>
 
@@ -139,6 +150,38 @@ export default function Dashboard() {
           </Link>
         </div>
 
+        {/* Info Card for new users */}
+        {!isLoading && registrations.length === 0 && (
+          <div className="mb-8 bg-primary/5 border border-primary/15 rounded-3xl p-6 relative overflow-hidden">
+            <div className="absolute -right-8 -top-8 w-32 h-32 bg-primary/5 rounded-full"></div>
+            <div className="relative z-10">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <span className="material-symbols-outlined text-primary text-[28px]">school</span>
+                </div>
+                <div>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Selamat Datang di Portal Pendaftaran!</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant mb-4">Anda belum mendaftarkan anak. Silakan ikuti langkah berikut untuk mendaftarkan putra-putri Anda:</p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl border border-outline-variant/50">
+                      <div className="w-6 h-6 rounded-full bg-[#C89B53] text-white flex items-center justify-center text-xs font-bold">1</div>
+                      <span className="font-label-md text-label-md text-primary">Klik &quot;Daftarkan Anak&quot;</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl border border-outline-variant/50">
+                      <div className="w-6 h-6 rounded-full bg-[#C89B53] text-white flex items-center justify-center text-xs font-bold">2</div>
+                      <span className="font-label-md text-label-md text-primary">Isi Formulir Lengkap</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl border border-outline-variant/50">
+                      <div className="w-6 h-6 rounded-full bg-[#C89B53] text-white flex items-center justify-center text-xs font-bold">3</div>
+                      <span className="font-label-md text-label-md text-primary">Tunggu Verifikasi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
           {/* Column 1 & 2: Main Widgets */}
@@ -158,7 +201,7 @@ export default function Dashboard() {
                   <div className="flex flex-col items-center justify-center p-8 bg-surface rounded-lg border border-outline-variant border-opacity-50 border-dashed">
                     <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">assignment_late</span>
                     <p className="font-label-md text-label-md text-primary">Belum ada data pendaftaran.</p>
-                    <p className="font-caption text-caption text-on-surface-variant mt-1 text-center">Silakan daftar melalui tombol "Daftarkan Anak".</p>
+                    <p className="font-caption text-caption text-on-surface-variant mt-1 text-center">Silakan daftar melalui tombol &quot;Daftarkan Anak&quot;.</p>
                   </div>
                 ) : (
                   registrations.map(reg => (
