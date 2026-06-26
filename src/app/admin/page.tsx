@@ -32,13 +32,19 @@ export default function AdminDashboard() {
       
       setIsAuthorized(true);
 
-      const { data } = await supabase
-        .from("registrations")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (data) {
-        setRegistrations(data);
+      // Fetch via server API route yang bypass RLS
+      try {
+        const res = await fetch("/api/admin/registrations");
+        if (res.ok) {
+          const json = await res.json();
+          setRegistrations(json.registrations || []);
+          setTotalBelumIsiForm(json.totalBelumIsiForm || 0);
+        } else {
+          const text = await res.text();
+          console.error("Failed to fetch admin data, status:", res.status, text);
+        }
+      } catch (err) {
+        console.error("Error fetching admin data:", err);
       }
       setIsLoading(false);
     };
@@ -65,19 +71,25 @@ export default function AdminDashboard() {
 
   const handleUpdateStatus = async (registrationId: string, newStatus: string) => {
     setUpdatingStatus(registrationId);
-    const { error } = await supabase
-      .from("registrations")
-      .update({ status: newStatus })
-      .eq("id", registrationId);
+    try {
+      const res = await fetch("/api/admin/status", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: registrationId, status: newStatus }),
+      });
 
-    if (!error) {
-      setRegistrations(prev =>
-        prev.map(reg =>
-          reg.id === registrationId ? { ...reg, status: newStatus } : reg
-        )
-      );
-    } else {
-      alert("Gagal mengubah status: " + error.message);
+      if (res.ok) {
+        setRegistrations(prev =>
+          prev.map(reg =>
+            reg.id === registrationId ? { ...reg, status: newStatus } : reg
+          )
+        );
+      } else {
+        const json = await res.json();
+        alert("Gagal mengubah status: " + (json.error || "Unknown error"));
+      }
+    } catch (err) {
+      alert("Gagal mengubah status. Silakan coba lagi.");
     }
     setUpdatingStatus(null);
   };
