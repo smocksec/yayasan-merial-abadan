@@ -37,10 +37,11 @@ export const updateSession = async (request: NextRequest) => {
 
   const path = request.nextUrl.pathname
 
-  // Proteksi khusus halaman Admin
+  const adminEmails = ['aufarifqi119@gmail.com', 'merialabadanmadani@yahoo.com'];
+
+  // Proteksi Rute: Jika admin page diakses oleh non-admin
   if (path.startsWith('/admin')) {
-    // Jika belum login atau email bukan admin, tendang ke dashboard (atau login)
-    if (!user || user.email?.toLowerCase() !== 'aufarifqi119@gmail.com') {
+    if (!user || !adminEmails.includes(user.email?.toLowerCase() || '')) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   }
@@ -59,7 +60,7 @@ export const updateSession = async (request: NextRequest) => {
 
   // Jika sudah login dan mencoba masuk ke halaman login
   if (user && path === '/login') {
-    if (user.email?.toLowerCase() === 'aufarifqi119@gmail.com') {
+    if (adminEmails.includes(user.email?.toLowerCase() || '')) {
       return NextResponse.redirect(new URL('/admin', request.url))
     }
     return NextResponse.redirect(new URL('/dashboard', request.url))

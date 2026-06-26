@@ -25,7 +25,8 @@ export default function AdminDashboard() {
     const fetchData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       
-      if (!user || user.email !== "aufarifqi119@gmail.com") {
+      const adminEmails = ["aufarifqi119@gmail.com", "merialabadanmadani@yahoo.com"];
+      if (!user || !adminEmails.includes(user.email?.toLowerCase() || '')) {
         router.push("/dashboard");
         return;
       }

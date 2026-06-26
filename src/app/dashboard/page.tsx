@@ -11,7 +11,10 @@ export default function Dashboard() {
   const [userName, setUserName] = useState("User");
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
+  
+  const adminEmails = ["aufarifqi119@gmail.com", "merialabadanmadani@yahoo.com"];
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,6 +26,9 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUserName(user.user_metadata?.full_name || user.email?.split('@')[0] || "User");
+        if (adminEmails.includes(user.email?.toLowerCase() || '')) {
+          setIsAdmin(true);
+        }
         
         const { data } = await supabase
           .from('registrations')
@@ -142,12 +148,22 @@ export default function Dashboard() {
             </h2>
             <p className="font-body-md text-body-md text-on-surface-variant">Pantau perkembangan dan administrasi pendidikan putra-putri Anda.</p>
           </div>
-          <Link href="/pendaftaran">
-            <button className="bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-6 py-3 hover:bg-tertiary-fixed-dim transition-colors shadow-sm flex items-center gap-2 rounded-full border border-transparent">
-              <span className="material-symbols-outlined">{registrations.length > 0 ? "edit" : "add"}</span>
-              {registrations.length > 0 ? "Edit Data Anak" : "Daftarkan Anak"}
-            </button>
-          </Link>
+          <div className="flex gap-3 flex-wrap">
+            {isAdmin && (
+              <Link href="/admin">
+                <button className="bg-primary text-white font-label-md text-label-md px-6 py-3 hover:bg-[#122432] transition-colors shadow-sm flex items-center gap-2 rounded-full border border-transparent">
+                  <span className="material-symbols-outlined">admin_panel_settings</span>
+                  Buka Admin Portal
+                </button>
+              </Link>
+            )}
+            <Link href="/pendaftaran">
+              <button className="bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-6 py-3 hover:bg-tertiary-fixed-dim transition-colors shadow-sm flex items-center gap-2 rounded-full border border-transparent">
+                <span className="material-symbols-outlined">{registrations.length > 0 ? "edit" : "add"}</span>
+                {registrations.length > 0 ? "Edit Data Anak" : "Daftarkan Anak"}
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* Info Card for new users */}

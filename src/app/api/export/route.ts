@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
   const supabase = createClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || user.email?.toLowerCase() !== "aufarifqi119@gmail.com") {
+  const adminEmails = ["aufarifqi119@gmail.com", "merialabadanmadani@yahoo.com"];
+  if (!user || !adminEmails.includes(user.email?.toLowerCase() || '')) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
