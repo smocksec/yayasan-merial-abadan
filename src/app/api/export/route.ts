@@ -20,24 +20,37 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
-  // Use service role to bypass RLS
-  let clientToUse: any = supabase;
-  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    clientToUse = createSupabaseClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY,
-      { auth: { persistSession: false } }
-    );
-  }
+  let registration: any = null;
 
-  const { data: registration, error } = await clientToUse
-    .from("registrations")
-    .select("*")
-    .eq("id", registrationId)
-    .single();
+  if (registrationId === "blank") {
+    registration = {
+      id: "_________ (Diisi Admin)",
+      created_at: new Date().toISOString(),
+      status: "Form Fisik",
+      nama_anak: "",
+      data_lengkap: {}
+    };
+  } else {
+    // Use service role to bypass RLS
+    let clientToUse: any = supabase;
+    if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      clientToUse = createSupabaseClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY,
+        { auth: { persistSession: false } }
+      );
+    }
 
-  if (error || !registration) {
-    return NextResponse.json({ error: "Registration not found" }, { status: 404 });
+    const { data, error } = await clientToUse
+      .from("registrations")
+      .select("*")
+      .eq("id", registrationId)
+      .single();
+
+    if (error || !data) {
+      return NextResponse.json({ error: "Registration not found" }, { status: 404 });
+    }
+    registration = data;
   }
 
   const d = registration.data_lengkap || {};

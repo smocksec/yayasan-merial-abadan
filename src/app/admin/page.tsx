@@ -148,6 +148,13 @@ export default function AdminDashboard() {
             <span className="material-symbols-outlined text-[18px]">download</span>
             {isExporting === "all" ? "Mengeksport..." : "Export Semua PDF"}
           </button>
+          <button
+            onClick={() => window.open("/api/export?id=blank", "_blank")}
+            className="px-5 py-2.5 font-label-md text-label-md text-primary bg-surface border border-outline-variant rounded-full hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">print</span>
+            Print Form Kosong
+          </button>
           <Link href="/dashboard" className="px-5 py-2.5 font-label-md text-label-md text-primary bg-surface border border-outline-variant rounded-full hover:bg-surface-container-low transition-colors shadow-sm">
             Lihat Tampilan User
           </Link>
